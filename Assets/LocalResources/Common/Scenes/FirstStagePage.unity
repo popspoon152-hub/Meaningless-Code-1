@@ -593,8 +593,8 @@ Canvas:
   m_GameObject: {fileID: 404638288}
   m_Enabled: 1
   serializedVersion: 3
-  m_RenderMode: 0
-  m_Camera: {fileID: 0}
+  m_RenderMode: 1
+  m_Camera: {fileID: 519420031}
   m_PlaneDistance: 100
   m_PixelPerfect: 0
   m_ReceivesEvents: 1
@@ -1135,7 +1135,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 1102, y: 576}
+  m_AnchoredPosition: {x: 1102, y: 493.00003}
   m_SizeDelta: {x: 150, y: 150}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &603143142
@@ -2801,7 +2801,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -1130, y: 576}
+  m_AnchoredPosition: {x: -1130, y: 493.00003}
   m_SizeDelta: {x: 150, y: 150}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1196540855
@@ -3920,7 +3920,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5338069154048293500, guid: 097fbfb5468112d45824d64aa3af2a02, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 610
+      value: 527
       objectReference: {fileID: 0}
     - target: {fileID: 5338069154048293500, guid: 097fbfb5468112d45824d64aa3af2a02, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -4350,7 +4350,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 840206747472793599, guid: bf477ecb4ff19b6439e28987deaecd6c, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 604
+      value: 521
       objectReference: {fileID: 0}
     - target: {fileID: 840206747472793599, guid: bf477ecb4ff19b6439e28987deaecd6c, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -4459,7 +4459,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5396977587059452540, guid: 1a3fb8e8b9bf012449c139598379b661, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 529
+      value: 446.00003
       objectReference: {fileID: 0}
     - target: {fileID: 5396977587059452540, guid: 1a3fb8e8b9bf012449c139598379b661, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -4651,9 +4651,9 @@ MonoBehaviour:
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
+  - {fileID: 519420032}
   - {fileID: 1252076020}
   - {fileID: 404638292}
-  - {fileID: 519420032}
   - {fileID: 1359352716}
   - {fileID: 8818559093331623854}
   - {fileID: 1337724031}
