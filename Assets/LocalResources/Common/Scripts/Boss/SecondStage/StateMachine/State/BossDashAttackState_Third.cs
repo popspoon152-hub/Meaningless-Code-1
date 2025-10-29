@@ -71,8 +71,8 @@ public class BossDashAttackState_Third : IBossStateThirdStage
         Vector2 dashDirection = new Vector2(directionSign, 0f);
 
         // 固定朝向
-        boss.localScale = new Vector3(Mathf.Abs(boss.localScale.x) * directionSign,
-                                      boss.localScale.y, boss.localScale.z);
+        //boss.localScale = new Vector3(Mathf.Abs(boss.localScale.x) * directionSign,
+         //                             boss.localScale.y, boss.localScale.z);
 
         float chargeTime = _stateMachine.DashChargeTime;
         Debug.Log("[BossDash] Charging before dash...");
