@@ -29,6 +29,7 @@ public class PlayerMovement : MonoBehaviour
     public PlayerMovementStats MoveStats;
     public PlayerAttackStats AttackStats;
     public PlayerHealth PlayerHealth;
+    public Animator TransAnim;
     [SerializeField] private BossFirstStateMachine _boss;
     [SerializeField] private BossThirdStateMachine _boss3;
     [SerializeField] private Collider2D _feetColl;
@@ -49,6 +50,8 @@ public class PlayerMovement : MonoBehaviour
     public Material PlayerMaterial;
     private SpriteRenderer _mr;
 
+    [Header("UI")]
+    public DashSlider DashSlider;
     //�ƶ����
     private Vector2 _moveVelocity;
     private bool _isFacingRight;
@@ -153,6 +156,8 @@ public class PlayerMovement : MonoBehaviour
         Anim.SetBool("IsJumping", _isJumping);
         Anim.SetBool("IsDashing", _isDashing);
         Anim.SetBool("IsGround", _isGrounded);
+
+        DashSlider.UpdateCD(_dashCooldownTimer, MoveStats.DashCooldown);
     }
 
 
@@ -796,10 +801,20 @@ public class PlayerMovement : MonoBehaviour
     {
         if (PlayerIsDead)
         {
-            EventCenter.Ins.Dispatch(EPlayerDeath.on);
-            int index = SceneManager.GetActiveScene().buildIndex;
-            SceneManager.LoadScene(index);
+            StartCoroutine(PlayerDeath());
         }
+    }
+
+    private IEnumerator PlayerDeath()
+    {
+        EventCenter.Ins.Dispatch(EPlayerDeath.on);
+
+        TransAnim.SetTrigger("Start");
+
+        yield return new WaitForSeconds(1f);
+
+        int index = SceneManager.GetActiveScene().buildIndex;
+        SceneManager.LoadScene(index);
     }
 
     #endregion
