@@ -56,5 +56,5 @@
         "temp/": true,
         "Temp/": true
     },
-    "dotnet.defaultSolution": "Meaningless-Code.sln"
+    "dotnet.defaultSolution": "Meaningless-Code-1.sln"
 }

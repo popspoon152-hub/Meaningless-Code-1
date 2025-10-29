@@ -4,68 +4,66 @@ using UnityEngine;
 [RequireComponent(typeof(Collider2D))]
 public class ContinuousDamage : MonoBehaviour
 {
-    [Header("自动引用")]
-    public BossThirdStateMachine bossStateMachine; // 自动或手动绑定
+    private Vector2 _moveDir;
+    private float _moveSpeed;
+    private float _damage;
+    private float _lifeTime;
+    private float _damageInterval = 0.5f;
 
-    private float _timer;
-    private float _damageTimer;
-    private bool _isActive;
-
+    private BossThirdStateMachine _boss;
     private Collider2D _collider;
-    private PlayerHealth _playerHealth;
+    private bool _isActive = false;
 
-    private void Awake()
+    private LayerMask _playerLayer;
+    private Coroutine _damageRoutine;
+  
+
+    public void Initialize(Vector2 dir)
     {
-        _collider = GetComponent<Collider2D>();
-        _collider.isTrigger = true;
+        _moveDir = dir.normalized;
+        _isActive = true;
+
+        // �ɵ�����ʼ��������������Ч
+        // e.g. Animator.SetTrigger("Activate");
     }
 
     private void Start()
     {
-        if (bossStateMachine == null)
-            bossStateMachine = FindObjectOfType<BossThirdStateMachine>();
+        _collider = GetComponent<Collider2D>();
+        _collider.isTrigger = true;
 
-        _isActive = true;
-        StartCoroutine(DamageZoneRoutine());
-    }
-
-    private IEnumerator DamageZoneRoutine()
-    {
-        _timer = 0f;
-
-        while (_timer < bossStateMachine.ZoneDuration)
+        // �Զ�����Boss����
+        _boss = FindObjectOfType<BossThirdStateMachine>();
+        if (_boss == null)
         {
-            _timer += Time.deltaTime;
-            yield return null;
+            Debug.LogError("[Shockwave] Could not find BossThirdStateMachine in scene!");
+            Destroy(gameObject);
+            return;
         }
 
-        // 持续时间到期后销毁
-        Destroy(gameObject);
+        // ��״̬����ȡ����
+        _moveSpeed = _boss.SmashShockwaveSpeed;
+        _damage = _boss.DashImpactDamage;
+        _lifeTime = _boss.SmashShockwaveLifetime;
+        _playerLayer = _boss.PlayerLayerMask;
+
+        // �����������ڼ�ʱ
+        Destroy(gameObject, _lifeTime);
     }
 
-    private void OnTriggerStay2D(Collider2D other)
+    private void Update()
     {
-        if (!_isActive) return;
+        //if (!_isActive) return;
+        //transform.Translate(_moveDir * _moveSpeed * Time.deltaTime);
+    }
 
-        // 检查目标是否为玩家
-        if (other.CompareTag("Player"))
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (((1 << collision.gameObject.layer) & _playerLayer) != 0)
         {
-            _damageTimer += Time.deltaTime;
-
-            if (_damageTimer >= bossStateMachine.ZoneDamageInterval)
-            {
-                _damageTimer = 0f;
-
-                PlayerHealth.Ins.TakeDamageByEnemy(bossStateMachine.ZoneDamage);
-            }
+            PlayerHealth.Ins.TakeDamageByEnemy(_damage);
+            Destroy(this.gameObject);
         }
     }
 
-    private void OnTriggerExit2D(Collider2D other)
-    {
-        if (other.CompareTag("Player"))
-        {
-            _damageTimer = 0f; // 离开范围后重置计时
-        }
-    }
 }
