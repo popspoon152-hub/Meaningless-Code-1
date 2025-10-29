@@ -1,14 +1,13 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.SearchService;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using static System.TimeZoneInfo;
 
 public class RewardBean : MonoBehaviour
 {
-    [Range(1, 8)] public int BeanHealth = 5;            //¶¹×ÓÉúÃüÖµ
+    [Range(1, 8)] public int BeanHealth = 5;            //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Öµ
     [SerializeField] private int _currentHealth;
     public bool IsDestroy = false;
     public Animator Anim;
@@ -24,11 +23,11 @@ public class RewardBean : MonoBehaviour
 
     private void Update()
     {
-        //²¥¶¯»­
+        //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 
         if (_currentHealth <= 0)
         {
-            //²¥¶¯»­
+            //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
             StartCoroutine(Dead());
 
         }

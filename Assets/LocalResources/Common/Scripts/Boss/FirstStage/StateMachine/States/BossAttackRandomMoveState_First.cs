@@ -3,7 +3,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
-using UnityEditorInternal;
 using UnityEngine;
 
 public class BossAttackRandomMoveState_First : IBossStateFirstStage
@@ -17,7 +16,7 @@ public class BossAttackRandomMoveState_First : IBossStateFirstStage
 
     private bool _isLeft;
 
-    // ½øÈë×´Ì¬Ê±µ÷ÓÃ£¨³õÊ¼»¯£©
+    // ï¿½ï¿½ï¿½ï¿½×´Ì¬Ê±ï¿½ï¿½ï¿½Ã£ï¿½ï¿½ï¿½Ê¼ï¿½ï¿½ï¿½ï¿½
     public void EnterState(BossFirstStateMachine stateMachine)
     {
         this._stateMachine = stateMachine;
@@ -39,7 +38,7 @@ public class BossAttackRandomMoveState_First : IBossStateFirstStage
         _stateMachine.IsMove = false;
         _stateMachine.CurrentMoveSpeed = _stateMachine.AttackRandomMoveUpSpeed;
 
-        // ¼ì²é±ØÒªµÄTransformÒýÓÃ
+        // ï¿½ï¿½ï¿½ï¿½Òªï¿½ï¿½Transformï¿½ï¿½ï¿½ï¿½
         if (_stateMachine.AttackRandomMoveJumpLeftPostion == null ||
             _stateMachine.AttackRandomMoveJumpRightPostion == null)
         {
@@ -91,7 +90,7 @@ public class BossAttackRandomMoveState_First : IBossStateFirstStage
     {
         for (int i = 1; i < _stateMachine.Segments.Count; i++)
         {
-            // Ê¹ÓÃÏà¶ÔÎ»ÖÃ
+            // Ê¹ï¿½ï¿½ï¿½ï¿½ï¿½Î»ï¿½ï¿½
             Vector3 segmentOffset = _isLeft ?
                 new Vector3(-i * 4.5f, 0, 0) :
                 new Vector3(i * 4.5f, 0, 0);
@@ -136,7 +135,7 @@ public class BossAttackRandomMoveState_First : IBossStateFirstStage
 
                 if (hitPlayer != null && hitPlayer.Length > 0)
                 {
-                    // È·±£PlayerHealthÊµÀý´æÔÚ
+                    // È·ï¿½ï¿½PlayerHealthÊµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
                     if (PlayerHealth.Ins != null)
                     {
                         PlayerHealth.Ins.TakeDamageByEnemy(_stateMachine.DownDamage);
@@ -147,7 +146,7 @@ public class BossAttackRandomMoveState_First : IBossStateFirstStage
                     }
                 }
 
-                yield return new WaitForSeconds(0.1f);
+                yield return new WaitForSeconds(1f);
 
                 if (UnityEngine.Object.FindObjectsOfType<Bean>() != null)
                 {
@@ -155,7 +154,7 @@ public class BossAttackRandomMoveState_First : IBossStateFirstStage
                 }
                 else
                 {
-                    //·ÖÎªÕ¾Á¢,³å·æ¹¥»÷£¬ÏÈÉÏÔÚÏÂµÄËæ»úÒÆ¶¯Á½ÖÖ
+                    //ï¿½ï¿½ÎªÕ¾ï¿½ï¿½,ï¿½ï¿½æ¹¥ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Âµï¿½ï¿½ï¿½ï¿½ï¿½Æ¶ï¿½ï¿½ï¿½ï¿½ï¿½
                     int randonNum = UnityEngine.Random.Range(0, 3);
                     if (randonNum == 0)
                     {
@@ -178,22 +177,22 @@ public class BossAttackRandomMoveState_First : IBossStateFirstStage
 
     #endregion
 
-    // Ã¿Ö¡¸üÐÂ
+    // Ã¿Ö¡ï¿½ï¿½ï¿½ï¿½
     public void UpdateState()
     {
         
     }
 
-    // ¹Ì¶¨Ê±¼ä²½³¤¸üÐÂ£¨ÎïÀíÏà¹Ø£©
+    // ï¿½Ì¶ï¿½Ê±ï¿½ä²½ï¿½ï¿½ï¿½ï¿½ï¿½Â£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ø£ï¿½
     public void FixedUpdateState()
     {
         if (_stateMachine == null) return;
 
-        //¸úËæÒÆ¶¯
+        //ï¿½ï¿½ï¿½ï¿½ï¿½Æ¶ï¿½
         if (_stateMachine.IsMove) _stateMachine.SegmentsMove();
     }
 
-    // ÍË³ö×´Ì¬Ê±µ÷ÓÃ£¨ÇåÀí£©
+    // ï¿½Ë³ï¿½×´Ì¬Ê±ï¿½ï¿½ï¿½Ã£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
     public void ExitState()
     {
         if (_attackRandomMove != null)
@@ -217,7 +216,7 @@ public class BossAttackRandomMoveState_First : IBossStateFirstStage
 
 
 
-    // ´¦Àí¶¯»­ÊÂ¼þ
+    // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Â¼ï¿½
     public void OnAnimationEvent(string eventName)
     {
 

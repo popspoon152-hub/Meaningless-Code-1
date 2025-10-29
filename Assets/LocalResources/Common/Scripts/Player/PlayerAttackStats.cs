@@ -1,4 +1,3 @@
-using Sirenix.Utilities.Editor;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,28 +6,28 @@ using UnityEngine;
 public class PlayerAttackStats : ScriptableObject
 {
     [Header("Attack Action")]
-    public float AttackNumberCount = 3;                                                 //¹¥»÷¶ÎÊý
-    [Range(1f, 100f)] public float[] ComboDamage = { 10f, 10f, 20f };                          //Ã¿¶Î¹¥»÷µÄÉËº¦
+    public float AttackNumberCount = 3;                                                 //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+    [Range(1f, 100f)] public float[] ComboDamage = { 10f, 10f, 20f };                          //Ã¿ï¿½Î¹ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ëºï¿½
 
     [Header("Attack Time")]
-    [Range(0.1f, 1f)] public float AttackComboWindow = 0.4f;                            //Á¬»÷Ê±¼ä´°¿Ú
-    [Range(0.1f, 1f)] public float[] AttackDuration = { 0.3f, 0.4f, 0.5f };             //Ã¿¶Î¹¥»÷µÄ³ÖÐøÊ±¼ä
-    [Range(0.1f, 1f)] public float AttackBuffer = 0.1f;                                 //¹¥»÷»º³åÊ±¼ä
+    [Range(0.1f, 1f)] public float AttackComboWindow = 0.4f;                            //ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ä´°ï¿½ï¿½
+    [Range(0.1f, 1f)] public float[] AttackDuration = { 0.3f, 0.4f, 0.5f };             //Ã¿ï¿½Î¹ï¿½ï¿½ï¿½ï¿½Ä³ï¿½ï¿½ï¿½Ê±ï¿½ï¿½
+    [Range(0.1f, 1f)] public float AttackBuffer = 0.1f;                                 //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½
 
     [Header("Attack Postion")]
-    [Range(0.1f, 30f)] public float[] AttackRange = { 3f, 4f, 5f };                       //¹¥»÷·¶Î§
-    [Range(0f, 3f)] public float[] AttackLittleDash = { 0.1f, 0.1f, 0.1f };             //Ã¿¶Î¹¥»÷µÄÐ¡³å´Ì¾àÀë
+    [Range(0.1f, 30f)] public float[] AttackRange = { 3f, 4f, 5f };                       //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Î§
+    [Range(0f, 3f)] public float[] AttackLittleDash = { 0.1f, 0.1f, 0.1f };             //Ã¿ï¿½Î¹ï¿½ï¿½ï¿½ï¿½ï¿½Ð¡ï¿½ï¿½Ì¾ï¿½ï¿½ï¿½
 
     [Header("Attack Layer")]
-    public LayerMask EnemyLayer;                                                        //µÐÈË²ã
-    public LayerMask BeanLayer;                                                     //ÕÏ°­²ã
-    public LayerMask GroundLayer;                                                   //µØÃæ²ã
-    public LayerMask RewardLayer;                                                   //½±Àø²ã
+    public LayerMask EnemyLayer;                                                        //ï¿½ï¿½ï¿½Ë²ï¿½
+    public LayerMask BeanLayer;                                                     //ï¿½Ï°ï¿½ï¿½ï¿½
+    public LayerMask GroundLayer;                                                   //ï¿½ï¿½ï¿½ï¿½ï¿½
+    public LayerMask RewardLayer;                                                   //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 
     [Header("AttackVisualization Tool")]
     public bool ShowAttackRangeArc = false;
 
-    [Header("¹¥»÷ÉÕÑªÊýÖµ")]
-    [Range(1f, 50f)] public float AttackHurtPlayerNum = 10f;                            //×Ô¼ºÉÕÑª 
+    [Header("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ñªï¿½ï¿½Öµ")]
+    [Range(1f, 50f)] public float AttackHurtPlayerNum = 10f;                            //ï¿½Ô¼ï¿½ï¿½ï¿½Ñª 
     public float PlayerAttackUpPerHealth;
 }

@@ -9,6 +9,6 @@ public class LaserSlider : MonoBehaviour
 
     public void UpdateCD(float current, float max)
     {
-        LaserBar.value = max - current;
+        LaserBar.value = (max - current) / max;
     }
 }

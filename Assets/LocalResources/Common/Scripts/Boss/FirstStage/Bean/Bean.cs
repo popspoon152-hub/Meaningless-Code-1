@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class Bean : MonoBehaviour
 {
-    [Range(1, 8)] public int BeanHealth = 5;            //¶¹×ÓÉúÃüÖµ
+    [Range(1, 8)] public int BeanHealth = 5;            //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Öµ
     [SerializeField] private int _currentHealth;
     public bool IsDestroy = false;
 
@@ -19,11 +19,11 @@ public class Bean : MonoBehaviour
 
     private void Update()
     {
-        //²¥¶¯»­
+        //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 
         if (_currentHealth <= 0)
         {
-            //²¥¶¯»­
+            //
             StartCoroutine(BeanDestroy());
 
         }
@@ -33,7 +33,7 @@ public class Bean : MonoBehaviour
     {
         Anim.SetTrigger("Dead");
         Col.enabled = false;
-
+        
         yield return new WaitForSeconds(1f);
 
         Destroy(this.gameObject);
@@ -41,6 +41,10 @@ public class Bean : MonoBehaviour
 
     private void OnDestroy()
     {
+        if(_currentHealth <= 0)
+        {
+            PlayerHealth.Ins.Health(10);
+        }
         EnvironmentAndMap environment = FindObjectOfType<EnvironmentAndMap>();
         if (environment != null)
         {

@@ -9,15 +9,15 @@ public class PlayerHealth : MonoBehaviour
     public PlayerSlider Slider;
  
     [Header("Health Num")]
-    [Range(50f, 150f)] public float PlayerMaxHealth = 100f;                                     //Íæ¼Ò×î´óÉúÃüÖµ
+    [Range(50f, 150f)] public float PlayerMaxHealth = 100f;                                     //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Öµ
 
     [Header("Health Decline")]
-    [Range(0f, 10f)] public float ExtraHealthDeclineNumDeltaTime = 5f;                          //ÐéÑªÌõÃ¿ÃëÏÂ½µÊýÖµ
+    [Range(0f, 10f)] public float ExtraHealthDeclineNumDeltaTime = 5f;                          //ï¿½ï¿½Ñªï¿½ï¿½Ã¿ï¿½ï¿½ï¿½Â½ï¿½ï¿½ï¿½Öµ
 
 
-    public float CurrentHealth;                                                                        //µ±Ç°ÉúÃüÖµ
-    public float CurrentExtraHealth;                                                                   //µ±Ç°ÐéÑªÖµ
-    private bool _isHealthDeclining;                                                                     //ÊÇ·ñÕýÔÚ¿ÛÑª
+    public float CurrentHealth;                                                                        //ï¿½ï¿½Ç°ï¿½ï¿½ï¿½ï¿½Öµ
+    public float CurrentExtraHealth;                                                                   //ï¿½ï¿½Ç°ï¿½ï¿½ÑªÖµ
+    private bool _isHealthDeclining;                                                                     //ï¿½Ç·ï¿½ï¿½ï¿½ï¿½Ú¿ï¿½Ñª
 
     private bool _playerIsDead = false;
 
@@ -72,7 +72,7 @@ public class PlayerHealth : MonoBehaviour
         {
             CurrentHealth = 0;
 
-            //Ïòplayer´«_isDead
+            //ï¿½ï¿½playerï¿½ï¿½_isDead
             _playerIsDead = true;
         }
 
@@ -104,19 +104,29 @@ public class PlayerHealth : MonoBehaviour
     #region Health
     public void HealthUntilExtraHealth()
     {
+        if(CurrentHealth > 100)
+        {
+            CurrentHealth = 100;
+        }
         CurrentHealth = CurrentExtraHealth;
         CurrentExtraHealth = CurrentHealth;
         _isHealthDeclining = false;
+
     }
 
     public void Health(float num)
     {
         CurrentHealth += num;
+        if(CurrentHealth > 100)
+        {
+            CurrentHealth = 100;
+        }
         if (CurrentHealth > CurrentExtraHealth)
         {
             CurrentExtraHealth = CurrentHealth;
             _isHealthDeclining = false;
         }
+        
     }
 
     #endregion
