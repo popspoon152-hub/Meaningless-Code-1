@@ -29,7 +29,7 @@ Shader "Custom/PixelShader"
                 float4 _MainTex_ST;
             CBUFFER_END
             float _PixelInterval;
-            float _PixelItensity;
+            float _Indensity;
 
             struct Attributes 
             {
@@ -54,13 +54,12 @@ Shader "Custom/PixelShader"
 
             half4 frag(Varyings i) : SV_Target
             {
-                float4 col = SAMPLE_TEXTURE2D(_MainTex, sampler_MainTex, i.uv);
-                float2 pixelAmount = i.uv / _PixelInterval;
-                float2 pixelAmount_int = pixelAmount - frac(pixelAmount);
-                pixelAmount_int *= _PixelInterval;
-                float2 uv = lerp(i.uv, pixelAmount_int,_PixelItensity); 
-                col = SAMPLE_TEXTURE2D(_MainTex, sampler_MainTex, uv);
-                return col;
+                float2 pixelAmount = 1/_PixelInterval;
+                float2 pixelAmount_Int=pixelAmount-frac(pixelAmount);//得到像素格数
+                float2 pixelatedUV= floor(i.uv*pixelAmount_Int)/pixelAmount_Int;
+                float2 use_uv=lerp(i.uv,pixelatedUV,_Indensity);
+                half4 Pixelate=SAMPLE_TEXTURE2D(_MainTex,sampler_MainTex,use_uv);
+                return Pixelate;
             }
             ENDHLSL
         }
