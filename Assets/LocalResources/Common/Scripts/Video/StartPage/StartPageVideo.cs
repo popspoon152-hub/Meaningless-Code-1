@@ -17,7 +17,10 @@ public class StartPageVideo : MonoBehaviour
     public VideoClip ExitVideo;
 
     [Header("Audios")]
-    public AudioSource StartAudio;
+    public AudioClip StartAudio;
+    public AudioClip SecondStartAudio;
+
+    public AudioSource CurrentAudio;
 
     public Image TitleImage;
     public Image VolumeImage;
@@ -39,7 +42,8 @@ public class StartPageVideo : MonoBehaviour
         VolumeSlider.gameObject.SetActive(false);
         VolumeImage.gameObject.SetActive(false);
 
-        StartAudio.Stop();
+        CurrentAudio.clip = StartAudio;
+        CurrentAudio.Stop();
 
         StartButton.OnDoubleClick.AddListener(ExitStartPage);
 
@@ -54,7 +58,7 @@ public class StartPageVideo : MonoBehaviour
             VideoPlayer.isLooping = false;
             VideoPlayer.Play();
 
-            // µÈ´ý¿ª³¡¶¯»­²¥·ÅÍê³É
+            // ï¿½È´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
             yield return new WaitForSeconds((float)OpeningAnimation.length);
 
         }
@@ -65,18 +69,20 @@ public class StartPageVideo : MonoBehaviour
     {
         if (!StartStats.IsGameFinished)
         {
-            VideoPlayer.clip = StartVideo;      
+            VideoPlayer.clip = StartVideo;
+            CurrentAudio.clip = StartAudio;      
         }
         else
         {
             VideoPlayer.clip = GameFinishedVideo;
+            CurrentAudio.clip = SecondStartAudio;
         }
             
         VideoPlayer.isLooping = true;
         VideoPlayer.Play();
 
-        StartAudio.loop = true;
-        StartAudio.Play();
+        CurrentAudio.loop = true;
+        CurrentAudio.Play();
 
         StartCoroutine(FadeIn());
         StartButton.gameObject.SetActive(true);
@@ -93,7 +99,7 @@ public class StartPageVideo : MonoBehaviour
         UnityEngine.Color transparentColor = new UnityEngine.Color(originalColor.r, originalColor.g, originalColor.b, 0f);
         UnityEngine.Color targetColor = new UnityEngine.Color(originalColor.r, originalColor.g, originalColor.b, 1f);
 
-        // ³õÊ¼ÉèÖÃÎªÍ¸Ã÷
+        // ï¿½ï¿½Ê¼ï¿½ï¿½ï¿½ï¿½ÎªÍ¸ï¿½ï¿½
         TitleImage.color = transparentColor;
 
         while (elapsedTime < fadeDuration)
@@ -104,7 +110,7 @@ public class StartPageVideo : MonoBehaviour
             yield return null;
         }
 
-        // È·±£×îÖÕÍêÈ«²»Í¸Ã÷
+        // È·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È«ï¿½ï¿½Í¸ï¿½ï¿½
         TitleImage.color = targetColor;
     }
 
@@ -129,22 +135,22 @@ public class StartPageVideo : MonoBehaviour
             yield return null;
         }
 
-        // È·±£×îÖÕÍêÈ«Í¸Ã÷
+        // È·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È«Í¸ï¿½ï¿½
         TitleImage.color = new UnityEngine.Color(originalColor.r, originalColor.g, originalColor.b, 0f);
     }
 
     private IEnumerator PlayExitVideoAndLoadScene()
     {
-        // ²¥·ÅÍË³öÊÓÆµ
+        // ï¿½ï¿½ï¿½ï¿½ï¿½Ë³ï¿½ï¿½ï¿½Æµ
         VideoPlayer.clip = ExitVideo;
         VideoPlayer.isLooping = false;
         VideoPlayer.Play();
 
-        // µÈ´ýÊÓÆµ³¤¶ÈµÄÊ±¼ä
+        // ï¿½È´ï¿½ï¿½ï¿½Æµï¿½ï¿½ï¿½Èµï¿½Ê±ï¿½ï¿½
         yield return new WaitForSeconds((float)ExitVideo.length);
 
-        // ¼ÓÔØ³¡¾°
-        StartAudio.Stop();
+        // ï¿½ï¿½ï¿½Ø³ï¿½ï¿½ï¿½
+        CurrentAudio.Stop();
         SceneManager.LoadScene("FirstStagePage");
     }
 
@@ -187,12 +193,12 @@ public class StartPageVideo : MonoBehaviour
     //    VideoPlayer.isLooping = false;
     //    VideoPlayer.Play();
 
-    //    Debug.Log("¿ªÊ¼²¥·ÅÍË³öÊÓÆµ");
+    //    Debug.Log("ï¿½ï¿½Ê¼ï¿½ï¿½ï¿½ï¿½ï¿½Ë³ï¿½ï¿½ï¿½Æµ");
     //}
 
     //private void OnStartMoveVideoFinished(VideoPlayer source)
     //{
-    //    Debug.Log("¿ªÊ¼ÒÆ¶¯ÊÓÆµ²¥·ÅÍê³É");
+    //    Debug.Log("ï¿½ï¿½Ê¼ï¿½Æ¶ï¿½ï¿½ï¿½Æµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½");
     //    VideoPlayer.loopPointReached -= OnStartMoveVideoFinished;
 
     //    SceneManager.LoadScene("FirstStagePage");

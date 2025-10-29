@@ -14,9 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   AttackNumberCount: 3
   ComboDamage:
-  - 10
-  - 10
-  - 20
+  - 1
+  - 1
+  - 3
   AttackComboWindow: 0.8
   AttackDuration:
   - 0.2
@@ -44,5 +44,5 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 2048
   ShowAttackRangeArc: 1
-  AttackHurtPlayerNum: 10
-  PlayerAttackUpPerHealth: 1
+  AttackHurtPlayerNum: 5
+  PlayerAttackUpPerHealth: 0.1

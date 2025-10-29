@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UIElements;
 using UnityEngine.Video;
 
 public class EndPageVideo : MonoBehaviour
@@ -30,6 +31,8 @@ public class EndPageVideo : MonoBehaviour
 
             yield return new WaitForSeconds((float)EndVideo.length);
         }
+
+        yield return new WaitForSeconds(3f);
         BackToMainInterface();
     }
 

@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using System.Threading;
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 public class GridManager : MonoBehaviour
@@ -65,7 +64,7 @@ public class GridManager : MonoBehaviour
     {
         List<Node> neighbours = new List<Node>();
 
-        // ËÄÏòÒÆ¶¯£ºÉÏ¡¢ÏÂ¡¢×ó¡¢ÓÒ
+        // ï¿½ï¿½ï¿½ï¿½ï¿½Æ¶ï¿½ï¿½ï¿½ï¿½Ï¡ï¿½ï¿½Â¡ï¿½ï¿½ï¿½ï¿½ï¿½
         int[] dx = { 0, 0, -1, 1 };
         int[] dy = { 1, -1, 0, 0 };
 

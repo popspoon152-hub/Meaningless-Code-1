@@ -6,7 +6,7 @@ using UnityEngine;
 using UnityEngine.AI;
 
 /// <summary>
-/// 83ÐÐÐ´Ë²ÒÆ
+/// 83ï¿½ï¿½Ð´Ë²ï¿½ï¿½
 /// </summary>
 
 public class BossEatBeansState_First : IBossStateFirstStage
@@ -14,14 +14,14 @@ public class BossEatBeansState_First : IBossStateFirstStage
     private BossFirstStateMachine _stateMachine;
 
     private Bean _targetBean;
-    private float NoBeansWaitTime = 0.2f;                             // Ã»ÓÐ¶¹×ÓÊ±µÄµÈ´ýÊ±¼ä
+    private float NoBeansWaitTime = 0.2f;                             // Ã»ï¿½Ð¶ï¿½ï¿½ï¿½Ê±ï¿½ÄµÈ´ï¿½Ê±ï¿½ï¿½
     private List<Vector3> _path;
     private int targetIndex;
 
     private Coroutine _noBeansCoroutine;
     private Coroutine _followPath;
 
-    // ½øÈë×´Ì¬Ê±µ÷ÓÃ£¨³õÊ¼»¯£©
+    // ï¿½ï¿½ï¿½ï¿½×´Ì¬Ê±ï¿½ï¿½ï¿½Ã£ï¿½ï¿½ï¿½Ê¼ï¿½ï¿½ï¿½ï¿½
     public void EnterState(BossFirstStateMachine stateMachine)
     {
         _stateMachine = stateMachine;
@@ -48,7 +48,7 @@ public class BossEatBeansState_First : IBossStateFirstStage
     #region FindPath & MoveToTarget
 
     /// <summary>
-    /// ÕÒµ½_targetBean
+    /// ï¿½Òµï¿½_targetBean
     /// </summary>
     private void SelectNextTarget()
     {
@@ -62,7 +62,7 @@ public class BossEatBeansState_First : IBossStateFirstStage
 
         if (beans == null || beans.Length == 0)
         {
-            // ÈôÉÐÎ´ÔËÐÐµÈ´ýÐ­³Ì£¬ÔòÆô¶¯µÈ´ý£»ÒÑ¾­ÔÚµÈ´ýÖÐÔòÖ±½Ó·µ»Ø
+            // ï¿½ï¿½ï¿½ï¿½Î´ï¿½ï¿½ï¿½ÐµÈ´ï¿½Ð­ï¿½Ì£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È´ï¿½ï¿½ï¿½ï¿½Ñ¾ï¿½ï¿½ÚµÈ´ï¿½ï¿½ï¿½ï¿½ï¿½Ö±ï¿½Ó·ï¿½ï¿½ï¿½
             if (_noBeansCoroutine == null)
             {
                 _noBeansCoroutine = _stateMachine.StartCoroutine(NoBeansWaitCoroutine());
@@ -88,7 +88,7 @@ public class BossEatBeansState_First : IBossStateFirstStage
 
         _targetBean = closestBean;
 
-        // Èç¹û»¹ÊÇÃ»ÕÒµ½ÓÐÐ§¶¹×Ó
+        // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ã»ï¿½Òµï¿½ï¿½ï¿½Ð§ï¿½ï¿½ï¿½ï¿½
         if (_targetBean == null && _noBeansCoroutine == null)
         {
             _noBeansCoroutine = _stateMachine.StartCoroutine(NoBeansWaitCoroutine());
@@ -96,23 +96,23 @@ public class BossEatBeansState_First : IBossStateFirstStage
 
         //if (_targetBean != null)
         //{
-        //    Debug.Log($"Ñ¡ÔñÁË¶¹×Ó£¬Î»ÖÃ: {_targetBean.transform.position}, ¾àÀë: {Vector3.Distance(_stateMachine.transform.position, _targetBean.transform.position)}");
+        //    Debug.Log($"Ñ¡ï¿½ï¿½ï¿½Ë¶ï¿½ï¿½Ó£ï¿½Î»ï¿½ï¿½: {_targetBean.transform.position}, ï¿½ï¿½ï¿½ï¿½: {Vector3.Distance(_stateMachine.transform.position, _targetBean.transform.position)}");
         //}
         //else
         //{
-        //    Debug.Log("Ã»ÓÐÕÒµ½ÓÐÐ§µÄ¶¹×Ó");
+        //    Debug.Log("Ã»ï¿½ï¿½ï¿½Òµï¿½ï¿½ï¿½Ð§ï¿½Ä¶ï¿½ï¿½ï¿½");
         //}
     }
 
     /// <summary>
-    /// ÕÒ²»µ½¶¹×ÓÊ±µÄµÈ´ýÐ­³Ì
+    /// ï¿½Ò²ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ÄµÈ´ï¿½Ð­ï¿½ï¿½
     /// </summary>
     /// <returns></returns>
     private IEnumerator NoBeansWaitCoroutine()
     {
         yield return new WaitForSeconds(NoBeansWaitTime);
 
-        // µÈ´ý½áÊøºóÔÙ´Î¼ì²é³¡ÉÏÊÇ·ñÓÐ¶¹×Ó
+        // ï¿½È´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ù´Î¼ï¿½é³¡ï¿½ï¿½ï¿½Ç·ï¿½ï¿½Ð¶ï¿½ï¿½ï¿½
         Bean[] beansAfter = UnityEngine.Object.FindObjectsOfType<Bean>();
         _noBeansCoroutine = null;
 
@@ -122,7 +122,7 @@ public class BossEatBeansState_First : IBossStateFirstStage
         }
         else
         {
-            // ÓÐ¶¹×ÓÔòÖØÐÂÑ¡Ä¿±ê
+            // ï¿½Ð¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ñ¡Ä¿ï¿½ï¿½
             SelectNextTarget();
             if (_targetBean != null)
             {
@@ -132,7 +132,7 @@ public class BossEatBeansState_First : IBossStateFirstStage
     }
 
     /// <summary>
-    /// ÒÆ¶¯µ½Ä¿±ê¶¹×Ó
+    /// ï¿½Æ¶ï¿½ï¿½ï¿½Ä¿ï¿½ê¶¹ï¿½ï¿½
     /// </summary>
     /// <exception></exception>
     private void MoveToTarget()
@@ -152,7 +152,7 @@ public class BossEatBeansState_First : IBossStateFirstStage
         if (Pathfinding.Ins == null)
         {
             //Debug.LogError("Pathfinding instance is null!");
-            // Â·¾¶²éÕÒ²»¿ÉÓÃ£¬Ö±½ÓÏò¶¹×ÓÒÆ¶¯
+            // Â·ï¿½ï¿½ï¿½ï¿½ï¿½Ò²ï¿½ï¿½ï¿½ï¿½Ã£ï¿½Ö±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ¶ï¿½
             _followPath = _stateMachine.StartCoroutine(MoveDirectlyToBean());
             return;
         }
@@ -166,7 +166,7 @@ public class BossEatBeansState_First : IBossStateFirstStage
         }
         else
         {
-            //Debug.LogWarning("Â·¾¶²éÕÒÊ§°Ü£¬Ö±½ÓÏò¶¹×ÓÒÆ¶¯");
+            //Debug.LogWarning("Â·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê§ï¿½Ü£ï¿½Ö±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ¶ï¿½");
             _followPath = _stateMachine.StartCoroutine(MoveDirectlyToBean());
         }
     }
@@ -175,7 +175,7 @@ public class BossEatBeansState_First : IBossStateFirstStage
     {
         if (_path == null || _path.Count == 0)
         {
-            //Debug.LogWarning("Â·¾¶Îª¿Õ£¬ÎÞ·¨¸úËæ");
+            //Debug.LogWarning("Â·ï¿½ï¿½Îªï¿½Õ£ï¿½ï¿½Þ·ï¿½ï¿½ï¿½ï¿½ï¿½");
             yield break;
         }
 
@@ -185,20 +185,20 @@ public class BossEatBeansState_First : IBossStateFirstStage
         while (true)
         {
 
-            // Â·¾¶µãµ½´ï¼ì²é
+            // Â·ï¿½ï¿½ï¿½ãµ½ï¿½ï¿½ï¿½ï¿½
             if (Vector3.Distance(_stateMachine.transform.position, currentWaypoint) <= 0.1f)
             {
                 targetIndex++;
                 if (targetIndex >= _path.Count)
                 {
-                    // Â·¾¶×ßÍêºó£¬Ö±½ÓÏò¶¹×ÓÒÆ¶¯£¬Ö±µ½³Ôµ½¶¹×Ó
+                    // Â·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ¶ï¿½ï¿½ï¿½Ö±ï¿½ï¿½ï¿½Ôµï¿½ï¿½ï¿½ï¿½ï¿½
                     yield return _stateMachine.StartCoroutine(MoveDirectlyToBean());
                     yield break;
                 }
                 currentWaypoint = _path[targetIndex];
             }
 
-            // ÒÆ¶¯
+            // ï¿½Æ¶ï¿½
             _stateMachine.transform.position = Vector3.MoveTowards(_stateMachine.transform.position, currentWaypoint, _stateMachine.CurrentMoveSpeed * Time.deltaTime);
 
             yield return null;
@@ -219,7 +219,7 @@ public class BossEatBeansState_First : IBossStateFirstStage
                 break;
             }
 
-            // Ö±½ÓÏò¶¹×ÓÎ»ÖÃÒÆ¶¯
+            // Ö±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Î»ï¿½ï¿½ï¿½Æ¶ï¿½
             _stateMachine.transform.position = Vector3.MoveTowards(
                 _stateMachine.transform.position,
                 _targetBean.transform.position,
@@ -230,7 +230,7 @@ public class BossEatBeansState_First : IBossStateFirstStage
         }
     }
 
-    // Í³Ò»µÄ¾àÀë¼ÆËã·½·¨
+    // Í³Ò»ï¿½Ä¾ï¿½ï¿½ï¿½ï¿½ï¿½ã·½ï¿½ï¿½
     private float GetDistanceToBean()
     {
         if (_targetBean == null) return float.MaxValue;
@@ -259,7 +259,7 @@ public class BossEatBeansState_First : IBossStateFirstStage
             {
                 _targetBean = null;
 
-                // Í£Ö¹ÒÆ¶¯
+                // Í£Ö¹ï¿½Æ¶ï¿½
                 if (_followPath != null)
                 {
                     _stateMachine.StopCoroutine(_followPath);
@@ -270,7 +270,7 @@ public class BossEatBeansState_First : IBossStateFirstStage
                 return;
             }
 
-            // ³Ô¶¹¼ì²é - Ö»ÔÚÃ»ÓÐÂ·¾¶¸úËæÊ±¼ì²é£¨Â·¾¶¸úËæ»áÔÚÄÚ²¿´¦Àí³Ô¶¹£©
+            // ï¿½Ô¶ï¿½ï¿½ï¿½ï¿½ - Ö»ï¿½ï¿½Ã»ï¿½ï¿½Â·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½é£¨Â·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ú²ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ô¶ï¿½ï¿½ï¿½
             //if (_followPath == null)
             //{
             //    float distToBean = GetDistanceToBean();
@@ -287,7 +287,7 @@ public class BossEatBeansState_First : IBossStateFirstStage
         }
     }
 
-    // Í³Ò»µÄ³Ô¶¹·½·¨
+    // Í³Ò»ï¿½Ä³Ô¶ï¿½ï¿½ï¿½ï¿½ï¿½
     private void EatBean()
     {
         if (_followPath != null)
@@ -308,22 +308,23 @@ public class BossEatBeansState_First : IBossStateFirstStage
                 else
                 {
                     UnityEngine.Object.Destroy(_targetBean.gameObject);
+                    _stateMachine.ChangeState(BossState.Grow);
                 }
             }
             catch (System.Exception e)
             {
-                Debug.LogError($"¶¹×ÓÏú»ÙÊ§°Ü: {e.Message}");
+                Debug.LogError($"ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê§ï¿½ï¿½: {e.Message}");
                 UnityEngine.Object.Destroy(_targetBean.gameObject);
             }
         }
 
         _targetBean = null;
 
-        // ÇÐ»»×´Ì¬
+        // ï¿½Ð»ï¿½×´Ì¬
         _stateMachine.ChangeState(BossState.Grow);
     }
 
-    // ¹Ì¶¨Ê±¼ä²½³¤¸üÐÂ£¨ÎïÀíÏà¹Ø£©
+    // ï¿½Ì¶ï¿½Ê±ï¿½ä²½ï¿½ï¿½ï¿½ï¿½ï¿½Â£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ø£ï¿½
     public void FixedUpdateState()
     {
         if (_stateMachine == null) return;
@@ -331,10 +332,10 @@ public class BossEatBeansState_First : IBossStateFirstStage
         if (_stateMachine.IsMove) _stateMachine.SegmentsMove();
     }
 
-    // ÍË³ö×´Ì¬Ê±µ÷ÓÃ£¨ÇåÀí£©
+    // ï¿½Ë³ï¿½×´Ì¬Ê±ï¿½ï¿½ï¿½Ã£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
     public void ExitState()
     {
-        // ÇåÀíËùÓÐÐ­³Ì
+        // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð­ï¿½ï¿½
         if (_noBeansCoroutine != null)
         {
             _stateMachine.StopCoroutine(_noBeansCoroutine);
@@ -353,7 +354,7 @@ public class BossEatBeansState_First : IBossStateFirstStage
         targetIndex = 0;
     }
 
-    // ´¦Àí¶¯»­ÊÂ¼þ
+    // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Â¼ï¿½
     public void OnAnimationEvent(string eventName)
     {
 
@@ -383,7 +384,7 @@ public class BossEatBeansState_First : IBossStateFirstStage
 
 
 
-    //// ½øÈë×´Ì¬Ê±µ÷ÓÃ£¨³õÊ¼»¯£©
+    //// ï¿½ï¿½ï¿½ï¿½×´Ì¬Ê±ï¿½ï¿½ï¿½Ã£ï¿½ï¿½ï¿½Ê¼ï¿½ï¿½ï¿½ï¿½
     //public void EnterState(BossFirstStateMachine stateMachine)
     //{
     //    _stateMachine = stateMachine;
@@ -397,17 +398,17 @@ public class BossEatBeansState_First : IBossStateFirstStage
     //    SelectNextTarget();
     //}
 
-    //// Ã¿Ö¡¸üÐÂ
+    //// Ã¿Ö¡ï¿½ï¿½ï¿½ï¿½
     //public void UpdateState()
     //{
-    //    //Èç¹ûÃ»ÓÐÄ¿±ê¶¹×Ó£¬³¢ÊÔÑ¡ÔñÏÂÒ»¸ö
+    //    //ï¿½ï¿½ï¿½Ã»ï¿½ï¿½Ä¿ï¿½ê¶¹ï¿½Ó£ï¿½ï¿½ï¿½ï¿½ï¿½Ñ¡ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½
     //    if(_targetBean == null)
     //    {
     //        SelectNextTarget();
     //        return;
     //    }
 
-    //    //Èç¹û±»Íæ¼Ò»òÆäËûÒòËØÆÆ»µ,ÔòÖØÐÂÑ¡ÔñÄ¿±ê
+    //    //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ»ï¿½,ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ñ¡ï¿½ï¿½Ä¿ï¿½ï¿½
     //    if(_targetBean.gameObject == null || !_targetBean.gameObject.activeInHierarchy)
     //    {
     //        _targetBean = null;
@@ -415,7 +416,7 @@ public class BossEatBeansState_First : IBossStateFirstStage
     //        return;
     //    }
 
-    //    //ÖÜÆÚÖØËãÂ·¾¶
+    //    //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Â·ï¿½ï¿½
     //    _repathTimer += Time.deltaTime;
     //    if (_repathTimer >= RepathInterval)
     //    {
@@ -424,7 +425,7 @@ public class BossEatBeansState_First : IBossStateFirstStage
     //    }
     //}
 
-    //// ¹Ì¶¨Ê±¼ä²½³¤¸üÐÂ£¨ÎïÀíÏà¹Ø£©
+    //// ï¿½Ì¶ï¿½Ê±ï¿½ä²½ï¿½ï¿½ï¿½ï¿½ï¿½Â£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ø£ï¿½
     //public void FixedUpdateState()
     //{
 
@@ -433,7 +434,7 @@ public class BossEatBeansState_First : IBossStateFirstStage
 
     //    if (_targetBean == null) return;
 
-    //    // ÒÆ¶¯µ½Ä¿±ê¶¹×Ó
+    //    // ï¿½Æ¶ï¿½ï¿½ï¿½Ä¿ï¿½ê¶¹ï¿½ï¿½
     //    Vector3 bossPos = _stateMachine.transform.position;
     //    Vector3 targetPos;
 
@@ -443,28 +444,28 @@ public class BossEatBeansState_First : IBossStateFirstStage
     //    }
     //    else
     //    {
-    //        // Ã»ÓÐ¿ÉÓÃÂ·¾¶Ê±Ö±½Ó×ßÏò bean µÄÎ»ÖÃ£¨¿ÉÄÜ±»ÕÏ°­×èµ²£©
+    //        // Ã»ï¿½Ð¿ï¿½ï¿½ï¿½Â·ï¿½ï¿½Ê±Ö±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ bean ï¿½ï¿½Î»ï¿½Ã£ï¿½ï¿½ï¿½ï¿½Ü±ï¿½ï¿½Ï°ï¿½ï¿½èµ²ï¿½ï¿½
     //        targetPos = _targetBean.transform.position;
     //    }
 
-    //    // ÏÞÖÆÊúÖ±ËÙ¶È£¨±£³Ö Y ÖáÆ½»¬£©
+    //    // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö±ï¿½Ù¶È£ï¿½ï¿½ï¿½ï¿½ï¿½ Y ï¿½ï¿½Æ½ï¿½ï¿½ï¿½ï¿½
     //    float desiredY = Mathf.MoveTowards(bossPos.y, targetPos.y, _maxVerticalSpeed * Time.fixedDeltaTime);
     //    targetPos.y = desiredY;
 
     //    Vector3 dir3 = targetPos - bossPos;
-    //    // Ö»ÔÚ X/Y Æ½ÃæÅÐ¶Ï corner µ½´ï£¨2D ÓÎÏ·³£ÓÃ£©
+    //    // Ö»ï¿½ï¿½ X/Y Æ½ï¿½ï¿½ï¿½Ð¶ï¿½ corner ï¿½ï¿½ï¿½ï£¨2D ï¿½ï¿½Ï·ï¿½ï¿½ï¿½Ã£ï¿½
     //    Vector2 dir2 = new Vector2(dir3.x, dir3.y);
     //    float sqrDist = dir2.sqrMagnitude;
     //    if (sqrDist <= _reachCornerThreshold * _reachCornerThreshold)
     //    {
-    //        // µ½´ïµ±Ç° corner£¬ÍÆ½øµ½ÏÂÒ»¸ö corner
+    //        // ï¿½ï¿½ï¿½ïµ±Ç° cornerï¿½ï¿½ï¿½Æ½ï¿½ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ corner
     //        if (_path != null && _path.corners != null && _currentCornerIndex < _path.corners.Length - 1)
     //        {
     //            _currentCornerIndex++;
     //        }
     //    }
 
-    //    //move(ÏÞÖÆÁËËÙ¶È) ¡ª¡ª Ê¹ÓÃ Rigidbody2D.MovePosition£¨½ÓÊÜ Vector2£©
+    //    //move(ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ù¶ï¿½) ï¿½ï¿½ï¿½ï¿½ Ê¹ï¿½ï¿½ Rigidbody2D.MovePositionï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Vector2ï¿½ï¿½
     //    if (dir2.sqrMagnitude > 1e-6f)
     //    {
     //        Vector3 moveDir3 = dir3.normalized;
@@ -477,25 +478,25 @@ public class BossEatBeansState_First : IBossStateFirstStage
 
     //        _stateMachine.Rb.MovePosition(newPos2);
 
-    //        // 2D ³¯Ïò£ºÈÆ Z ÖáÐý×ª£¨±ÜÃâÊ¹ÓÃ LookRotation£©
+    //        // 2D ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Z ï¿½ï¿½ï¿½ï¿½×ªï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê¹ï¿½ï¿½ LookRotationï¿½ï¿½
     //        if (moveDir2 != Vector2.zero)
     //        {
     //            float angle = Mathf.Atan2(moveDir2.y, moveDir2.x) * Mathf.Rad2Deg;
     //            Quaternion targetRot = Quaternion.Euler(0f, 0f, angle);
 
-    //            // Æ½»¬Ðý×ª£¬±ÜÃâË²¼ä¸©Ñö
+    //            // Æ½ï¿½ï¿½ï¿½ï¿½×ªï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ë²ï¿½ä¸©ï¿½ï¿½
     //            _stateMachine.transform.rotation = Quaternion.Slerp(_stateMachine.transform.rotation, targetRot, Mathf.Clamp01(8f * Time.fixedDeltaTime));
     //        }
     //    }
 
-    //    //¼ì²é³Ô¶¹Ìõ¼þ£¨»ùÓÚ 2D Æ½Ãæ¾àÀë£©
+    //    //ï¿½ï¿½ï¿½Ô¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ 2D Æ½ï¿½ï¿½ï¿½ï¿½ë£©
     //    float distToBean = Vector2.Distance(new Vector2(bossPos.x, bossPos.y), new Vector2(_targetBean.transform.position.x, _targetBean.transform.position.y));
 
     //    #endregion
 
     //}
 
-    //// ÍË³ö×´Ì¬Ê±µ÷ÓÃ£¨ÇåÀí£©
+    //// ï¿½Ë³ï¿½×´Ì¬Ê±ï¿½ï¿½ï¿½Ã£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
     //public void ExitState()
     //{
     //    if (_noBeansCoroutine != null)
@@ -508,7 +509,7 @@ public class BossEatBeansState_First : IBossStateFirstStage
     //    _path = null;
     //}
 
-    //// ´¦Àí¶¯»­ÊÂ¼þ
+    //// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Â¼ï¿½
     //public void OnAnimationEvent(string eventName)
     //{
 
@@ -521,7 +522,7 @@ public class BossEatBeansState_First : IBossStateFirstStage
     //    Bean[] beans = UnityEngine.Object.FindObjectsOfType<Bean>();
     //    if(beans == null || beans.Length == 0)
     //    {
-    //        // ÈôÉÐÎ´ÔËÐÐµÈ´ýÐ­³Ì£¬ÔòÆô¶¯µÈ´ý£»ÒÑ¾­ÔÚµÈ´ýÖÐÔòÖ±½Ó·µ»Ø
+    //        // ï¿½ï¿½ï¿½ï¿½Î´ï¿½ï¿½ï¿½ÐµÈ´ï¿½Ð­ï¿½Ì£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È´ï¿½ï¿½ï¿½ï¿½Ñ¾ï¿½ï¿½ÚµÈ´ï¿½ï¿½ï¿½ï¿½ï¿½Ö±ï¿½Ó·ï¿½ï¿½ï¿½
     //        if (_noBeansCoroutine == null)
     //        {
     //            _noBeansCoroutine = _stateMachine.StartCoroutine(NoBeansWaitCoroutine());
@@ -529,7 +530,7 @@ public class BossEatBeansState_First : IBossStateFirstStage
     //        return;
     //    }
 
-    //    // ÈôÔÚµÈ´ý½×¶Î³öÏÖÁË¶¹×Ó£¬È¡ÏûµÈ´ýÐ­³Ì
+    //    // ï¿½ï¿½ï¿½ÚµÈ´ï¿½ï¿½×¶Î³ï¿½ï¿½ï¿½ï¿½Ë¶ï¿½ï¿½Ó£ï¿½È¡ï¿½ï¿½ï¿½È´ï¿½Ð­ï¿½ï¿½
     //    if (_noBeansCoroutine != null)
     //    {
     //        _stateMachine.StopCoroutine(_noBeansCoroutine);
@@ -542,7 +543,7 @@ public class BossEatBeansState_First : IBossStateFirstStage
     //    {
     //        if (candidate == null || candidate.gameObject == null || !candidate.gameObject.activeInHierarchy) continue;
 
-    //        // ³¢ÊÔÍ¨¹ý NavMesh ¼ÆËãÂ·¾¶
+    //        // ï¿½ï¿½ï¿½ï¿½Í¨ï¿½ï¿½ NavMesh ï¿½ï¿½ï¿½ï¿½Â·ï¿½ï¿½
     //        if (TryComputePath(candidate.transform.position, out NavMeshPath candidatePath) && candidatePath.status == NavMeshPathStatus.PathComplete)
     //        {
     //            _targetBean = candidate;
@@ -553,13 +554,13 @@ public class BossEatBeansState_First : IBossStateFirstStage
     //        }
     //    }
 
-    //    // Èç¹ûÃ»ÓÐÈÎºÎÔ¶µÄ¿É´ï bean£¬ÔÙ³¢ÊÔÑ¡ÔñÈÎÒâ×î½üµÄ£¨½µ¼¶´¦Àí£©
+    //    // ï¿½ï¿½ï¿½Ã»ï¿½ï¿½ï¿½Îºï¿½Ô¶ï¿½Ä¿É´ï¿½ beanï¿½ï¿½ï¿½Ù³ï¿½ï¿½ï¿½Ñ¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
     //    var fallback = ordered.OrderBy(b => Vector3.Distance(_stateMachine.transform.position, b.transform.position)).FirstOrDefault();
     //    if (fallback != null)
     //    {
-    //        // ÈÔÈ»³¢ÊÔÖ±ÏßÂ·¾¶£¨ËäÈ»ÓÐÕÏ°­£©
+    //        // ï¿½ï¿½È»ï¿½ï¿½ï¿½ï¿½Ö±ï¿½ï¿½Â·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È»ï¿½ï¿½ï¿½Ï°ï¿½ï¿½ï¿½
     //        _targetBean = fallback;
-    //        TryComputePath(_targetBean.transform.position, out _path); // ¿ÉÄÜÊÇ²»¿ÉÍêÕûÂ·¾¶
+    //        TryComputePath(_targetBean.transform.position, out _path); // ï¿½ï¿½ï¿½ï¿½ï¿½Ç²ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Â·ï¿½ï¿½
     //        _currentCornerIndex = 0;
     //        _repathTimer = 0f;
     //    }
@@ -573,7 +574,7 @@ public class BossEatBeansState_First : IBossStateFirstStage
     //{
     //    yield return new WaitForSeconds(NoBeansWaitTime);
 
-    //    // µÈ´ý½áÊøºóÔÙ´Î¼ì²é³¡ÉÏÊÇ·ñÓÐ¶¹×Ó
+    //    // ï¿½È´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ù´Î¼ï¿½é³¡ï¿½ï¿½ï¿½Ç·ï¿½ï¿½Ð¶ï¿½ï¿½ï¿½
     //    Bean[] beansAfter = UnityEngine.Object.FindObjectsOfType<Bean>();
     //    _noBeansCoroutine = null;
 
@@ -583,7 +584,7 @@ public class BossEatBeansState_First : IBossStateFirstStage
     //    }
     //    else
     //    {
-    //        // ÓÐ¶¹×ÓÔòÖØÐÂÑ¡Ä¿±ê
+    //        // ï¿½Ð¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ñ¡Ä¿ï¿½ï¿½
     //        SelectNextTarget();
     //    }
     //}
@@ -601,13 +602,13 @@ public class BossEatBeansState_First : IBossStateFirstStage
     //    try
     //    {
     //        Vector3 source = _stateMachine.transform.position;
-    //        // Ê¹ÓÃ NavMesh ¼ÆËãÍêÈ«Â·¾¶
+    //        // Ê¹ï¿½ï¿½ NavMesh ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È«Â·ï¿½ï¿½
     //        bool ok = NavMesh.CalculatePath(source, destination, NavMesh.AllAreas, outPath);
     //        return ok;
     //    }
     //    catch (Exception)
     //    {
-    //        // Èç¹û NavMesh ²»¿ÉÓÃ»ò·¢ÉúÒì³££¬·µ»ØÊ§°Ü£¨ÉÏ²ã»á×ö½µ¼¶ÒÆ¶¯£©
+    //        // ï¿½ï¿½ï¿½ NavMesh ï¿½ï¿½ï¿½ï¿½ï¿½Ã»ï¿½ï¿½ï¿½ï¿½ì³£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê§ï¿½Ü£ï¿½ï¿½Ï²ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ¶ï¿½ï¿½ï¿½
     //        outPath = null;
     //        return false;
     //    }
