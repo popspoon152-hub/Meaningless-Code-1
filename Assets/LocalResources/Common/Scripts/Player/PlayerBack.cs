@@ -9,6 +9,10 @@ public class PlayerBack : MonoBehaviour
     [Header("角色回溯")]
     [Range(1f, 5f)] public float BackTime = 2f;                     //回溯到几秒前的位置
     public PlayerHealth Health;
+    public float BackCoolDown = 2f;
+    public BackSlider BackSlider;
+
+    private float _backCoolDownTimer;
 
     [System.Serializable]
     public class TimedPostion
@@ -31,6 +35,8 @@ public class PlayerBack : MonoBehaviour
         RemoveOldPostions();
 
         BackCheck();
+
+        BackSlider.UpdateCD(_backCoolDownTimer, BackCoolDown);
     }
 
     #region Quene
@@ -53,7 +59,10 @@ public class PlayerBack : MonoBehaviour
     
     private void BackCheck()
     {
-        if (InputManager.BackWasPressed)
+        if (_backCoolDownTimer > 0f)
+            _backCoolDownTimer -= Time.deltaTime;
+
+        if (InputManager.BackWasPressed && _backCoolDownTimer <= 0f)
         {
             Vector2 backPos;
 
@@ -62,6 +71,8 @@ public class PlayerBack : MonoBehaviour
                 // 队列中最旧的位置就是两秒前的位置
                 backPos = _positionQueue.Peek().Position;
                 Health.HealthUntilExtraHealth();
+
+                _backCoolDownTimer = BackCoolDown;
             }
             else
             {
