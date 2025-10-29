@@ -110,70 +110,80 @@ public class LaserSkillEightWay : MonoBehaviour
         Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         Vector2 playerPos = transform.position;
 
-        if(mousePos.x < playerPos.x - AnimOffset && playerPos.y - AnimOffset < mousePos.y && mousePos.y < playerPos.y + AnimOffset)
-        {
-            //左
-            Anim.SetTrigger("Left");
-        }
-        else if(mousePos.x > playerPos.x + AnimOffset && playerPos.y - AnimOffset < mousePos.y && mousePos.y < playerPos.y + AnimOffset)
+        if(mousePos.x > playerPos.x)
         {
             //右
             Anim.SetTrigger("Right");
         }
-        else if(mousePos.x < playerPos.x - AnimOffset && mousePos.y > playerPos.y + AnimOffset)
-        {
-            //左上
-            Anim.SetTrigger("LeftUp");
-        }
-        else if (mousePos.x > playerPos.x + AnimOffset && mousePos.y > playerPos.y + AnimOffset)
-        {
-            //右上
-            Anim.SetTrigger("RightUp");
-        }
-        else if (mousePos.x < playerPos.x - AnimOffset && mousePos.y < playerPos.y - AnimOffset)
-        {
-            //左下
-            Anim.SetTrigger("LeftDown");
-        }
-        else if (mousePos.x > playerPos.x + AnimOffset && mousePos.y < playerPos.y - AnimOffset)
-        {
-            //右下
-            Anim.SetTrigger("RightDown");
-        }
-        else if (playerPos.x - AnimOffset < mousePos.x && mousePos.x < playerPos.x + AnimOffset && mousePos.y > playerPos.y + AnimOffset)
-        {
-            //上
-            Anim.SetTrigger("Up");
-        }
-        else if(playerPos.x - AnimOffset < mousePos.x && mousePos.x < playerPos.x + AnimOffset && mousePos.y < playerPos.y - AnimOffset)
-        {
-            //下
-            Anim.SetTrigger("Down");
-        }
         else
         {
-            Vector2 posVector = mousePos - playerPos;
-            if(posVector.x > 0 && posVector.y > 0)
-            {
-                //右上
-                Anim.SetTrigger("RightUp");
-            }
-            else if (posVector.x > 0 && posVector.y < 0)
-            {
-                //右下
-                Anim.SetTrigger("RightDown");
-            }
-            else if (posVector.x < 0 && posVector.y > 0)
-            {
-                //左上
-                Anim.SetTrigger("LeftUp");
-            }
-            else
-            {
-                //左下
-                Anim.SetTrigger("LeftDown");
-            }
+            //左
+            Anim.SetTrigger("Left");
         }
+        //if(mousePos.x < playerPos.x - AnimOffset && playerPos.y - AnimOffset < mousePos.y && mousePos.y < playerPos.y + AnimOffset)
+        //{
+        //    //左
+        //    Anim.SetTrigger("Left");
+        //}
+        //else if(mousePos.x > playerPos.x + AnimOffset && playerPos.y - AnimOffset < mousePos.y && mousePos.y < playerPos.y + AnimOffset)
+        //{
+        //    //右
+        //    Anim.SetTrigger("Right");
+        //}
+        //else if(mousePos.x < playerPos.x - AnimOffset && mousePos.y > playerPos.y + AnimOffset)
+        //{
+        //    //左上
+        //    Anim.SetTrigger("LeftUp");
+        //}
+        //else if (mousePos.x > playerPos.x + AnimOffset && mousePos.y > playerPos.y + AnimOffset)
+        //{
+        //    //右上
+        //    Anim.SetTrigger("RightUp");
+        //}
+        //else if (mousePos.x < playerPos.x - AnimOffset && mousePos.y < playerPos.y - AnimOffset)
+        //{
+        //    //左下
+        //    Anim.SetTrigger("LeftDown");
+        //}
+        //else if (mousePos.x > playerPos.x + AnimOffset && mousePos.y < playerPos.y - AnimOffset)
+        //{
+        //    //右下
+        //    Anim.SetTrigger("RightDown");
+        //}
+        //else if (playerPos.x - AnimOffset < mousePos.x && mousePos.x < playerPos.x + AnimOffset && mousePos.y > playerPos.y + AnimOffset)
+        //{
+        //    //上
+        //    Anim.SetTrigger("Up");
+        //}
+        //else if(playerPos.x - AnimOffset < mousePos.x && mousePos.x < playerPos.x + AnimOffset && mousePos.y < playerPos.y - AnimOffset)
+        //{
+        //    //下
+        //    Anim.SetTrigger("Down");
+        //}
+        //else
+        //{
+        //    Vector2 posVector = mousePos - playerPos;
+        //    if(posVector.x > 0 && posVector.y > 0)
+        //    {
+        //        //右上
+        //        Anim.SetTrigger("RightUp");
+        //    }
+        //    else if (posVector.x > 0 && posVector.y < 0)
+        //    {
+        //        //右下
+        //        Anim.SetTrigger("RightDown");
+        //    }
+        //    else if (posVector.x < 0 && posVector.y > 0)
+        //    {
+        //        //左上
+        //        Anim.SetTrigger("LeftUp");
+        //    }
+        //    else
+        //    {
+        //        //左下
+        //        Anim.SetTrigger("LeftDown");
+        //    }
+        //}
     }
 
     private Vector2 GetShootDirection()
