@@ -4780,7 +4780,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2202277504839506393, guid: 9a1ea833e2c26144bb4b69c492740ce8, type: 3}
       propertyPath: laserLength
-      value: 50
+      value: 150
       objectReference: {fileID: 0}
     - target: {fileID: 2202277504839506393, guid: 9a1ea833e2c26144bb4b69c492740ce8, type: 3}
       propertyPath: laserPrefab

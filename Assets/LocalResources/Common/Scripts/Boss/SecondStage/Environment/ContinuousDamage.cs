@@ -62,7 +62,7 @@ public class ContinuousDamage : MonoBehaviour
         if (((1 << collision.gameObject.layer) & _playerLayer) != 0)
         {
             PlayerHealth.Ins.TakeDamageByEnemy(_damage);
-            Destroy(this.gameObject);
+            //Destroy(this.gameObject);
         }
     }
 

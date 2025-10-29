@@ -57,7 +57,7 @@ Material:
     - _LinesWidth: -0.08
     - _Metallic: 0
     - _Offset: 0.97
-    - _PixelInterval: 0.02
+    - _PixelInterval: 0.004
     - _PixelItensity: 1
     - _PixelRatio: 0.76
     - _PixelScale: 0.76
