@@ -103,7 +103,7 @@ Material:
     - _EnableExternalAlpha: 0
     - _Frequency: 35.5
     - _GlitchSpeed: 1
-    - _GlitchStrength: 1.01
+    - _GlitchStrength: 0.5
     - _GlossMapScale: 1
     - _Glossiness: 0.5
     - _GlossyReflections: 1

@@ -1,18 +1,25 @@
-Shader "Custom/Pixelate"
+Shader "Universal Render Pipeline/WaveGlitch"
 {
-   Properties
+    Properties
     {
         _MainTex ("MaintTex", 2D) = "white" {}
-        _PixelInterval("PixelInterval",Range(0.000001,1.0))=1.0
-        _Indensity("Indensity",Range(0,1))=1.0
+        _Frequency("Frequency",Float)=1.0
+        _ScanLineDensity("ScanLineDensity",Float)=1.0
+        _Threshold("Threshold",Float)=1.0
+        _Amount("Amount",Range(0,1.0))=0.5
     }
     SubShader
     {
         Tags{
-            "RenderType"="Opaque"
-            "RenderPipeline"="UniversalRenderPipeline"
+            "RenderType" = "Transparent"
+            "RenderPipeline" = "UniversalPipeline"
+            "Queue" = "Transparent"
         }
-        Pass{
+        Cull Off
+        ZWrite Off
+		Blend SrcAlpha OneMinusSrcAlpha
+        Pass
+        {
 
             HLSLPROGRAM
             #pragma vertex vert
@@ -20,14 +27,14 @@ Shader "Custom/Pixelate"
             #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
             #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Lighting.hlsl"
             #include "Packages/com.unity.render-pipelines.core/ShaderLibrary/SpaceTransforms.hlsl"
-            
             TEXTURE2D(_MainTex);
             SAMPLER(sampler_MainTex);
             CBUFFER_START(UnityPerMaterial)
                 float4 _MainTex_ST;
             CBUFFER_END
-            float _PixelInterval;
-            float _Indensity; 
+            float _Frequency;
+            float _Threshold;
+            float _Amount;
 
             struct Attributes 
             {
@@ -39,8 +46,9 @@ Shader "Custom/Pixelate"
             {
                 float4 pos : SV_POSITION;
                 float3 worldPos : TEXCOORD0;
-                float2 uv : TEXCOORD1;
+                float2 uv : TEXCOORD4;
             };
+
             Varyings vert(Attributes i) 
             {
                 Varyings output;
@@ -50,16 +58,29 @@ Shader "Custom/Pixelate"
                 return output;
             }
 
-            half4 frag(Varyings i):SV_Target
+            float randomNoise(float x, float y)
             {
-                float2 pixelAmount = 1/_PixelInterval;
-                float2 pixelAmount_Int = pixelAmount - frac(pixelAmount);//得到像素格数
-                float2 pixelatedUV = floor(i.uv*pixelAmount_Int)/pixelAmount_Int;
-                float2 use_uv = lerp(i.uv, pixelatedUV, _Indensity);
-                half4 Pixelate = SAMPLE_TEXTURE2D(_MainTex, sampler_MainTex,use_uv);
-
-                return Pixelate;
+                return frac(sin(dot(float2(x, y), float2(12.9898, 78.233))) * 43758.5453);
             }
+
+            half4 frag(Varyings i) : SV_Target
+            {
+                half strength = 0;
+		        #if USING_FREQUENCY_INFINITE
+			        strength = 1;
+		        #else
+			    strength = 0.5 + 0.5 * cos(_Time.y * _Frequency);
+		        #endif
+		
+		
+		        float jitter = randomNoise(i.uv.y, _Time.x) * 2 - 1;
+		        jitter *= step(_Threshold, abs(jitter)) * _Amount * strength;
+		
+		        half4 sceneColor = SAMPLE_TEXTURE2D(_MainTex, sampler_MainTex, frac(i.uv + float2(jitter, 0)));
+		
+		        return sceneColor;
+            }
+
             ENDHLSL
         }
     }

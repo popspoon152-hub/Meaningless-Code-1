@@ -1,16 +1,18 @@
-Shader "Custom/PixelShader"
+Shader "Universal Render Pipeline/DeadBlock"
 {
     Properties
     {
-        _MainTex ("MainTex", 2D) = "white" {}
-        _PixelInterval("PixelInterval",Range(0.000001,1.0))=1.0//像素化强度
-        _Indensity("Indensity",Range(0,1))=1.0 //影响强度
+        _Tex ("Albedo (RGB)", 2D) = "white" {}
+        _EmissionMask ("EmissionMask", 2D) = "white" {}
+        _Speed("Speed",Float)=1.0
+        [HDR]_Emission("Emission",Color)=(1,1,1,1)
     }
     SubShader
     {
         Tags{
-            "RenderType"="Opaque"
-            "RenderPipeline"="UniversalRenderPipeline"
+            "RenderType" = "Transparent"
+            "RenderPipeline" = "UniversalPipeline"
+            "Queue" = "Transparent"
         }
         Cull Off
         ZWrite Off
@@ -23,13 +25,16 @@ Shader "Custom/PixelShader"
             #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
             #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Lighting.hlsl"
             #include "Packages/com.unity.render-pipelines.core/ShaderLibrary/SpaceTransforms.hlsl"
-            TEXTURE2D(_MainTex);
-            SAMPLER(sampler_MainTex);
+            TEXTURE2D(_Tex);
+            SAMPLER(sampler_Tex);
+            TEXTURE2D(_EmissionMask);
+            SAMPLER(sampler_EmissionMask);
+            float4 _Emission;
+            float _Speed;
+
             CBUFFER_START(UnityPerMaterial)
-                float4 _MainTex_ST;
+                float4 _Tex_ST;
             CBUFFER_END
-            float _PixelInterval;
-            float _Indensity;
 
             struct Attributes 
             {
@@ -41,25 +46,22 @@ Shader "Custom/PixelShader"
             {
                 float4 pos : SV_POSITION;
                 float3 worldPos : TEXCOORD0;
-                float2 uv : TEXCOORD4;
+                float2 uv : TEXCOORD1;
             };
             Varyings vert(Attributes i) 
             {
                 Varyings output;
                 output.worldPos = TransformObjectToWorld(i.vertex.xyz);
                 output.pos = TransformWorldToHClip(output.worldPos);
-                output.uv = TRANSFORM_TEX(i.texcoord,_MainTex);
+                output.uv = TRANSFORM_TEX(i.texcoord,_Tex);
                 return output;
             }
 
             half4 frag(Varyings i) : SV_Target
             {
-                float2 pixelAmount = 1/_PixelInterval;
-                float2 pixelAmount_Int=pixelAmount-frac(pixelAmount);//得到像素格数
-                float2 pixelatedUV= floor(i.uv*pixelAmount_Int)/pixelAmount_Int;
-                float2 use_uv=lerp(i.uv,pixelatedUV,_Indensity);
-                half4 Pixelate=SAMPLE_TEXTURE2D(_MainTex,sampler_MainTex,use_uv);
-                return Pixelate;
+                half4 texcol = SAMPLE_TEXTURE2D(_Tex, sampler_Tex, float2(i.uv.x- _Time.x * _Speed,i.uv.y ));
+                half4 mask = SAMPLE_TEXTURE2D(_EmissionMask, sampler_EmissionMask, float2 ( i.uv.x - _Time.x *_Speed, i.uv.y ) );
+                return texcol * mask * _Emission ;
             }
             ENDHLSL
         }

@@ -1,4 +1,4 @@
-Shader "Custom/BossLightFlow"
+Shader "Universal Render Pipeline/BossLightFlow"
 {
     Properties
     {
@@ -21,7 +21,9 @@ Shader "Custom/BossLightFlow"
             "Queue" = "Transparent"
         }
 
-        Blend SrcAlpha OneMinusSrcAlpha
+        Cull Off
+        ZWrite Off
+		Blend SrcAlpha OneMinusSrcAlpha
 
         Pass
         {
@@ -83,7 +85,7 @@ Shader "Custom/BossLightFlow"
                 float phase = stripeIndex * _FlowDistort;
 
                 float2 flowUV = float2(i.uv.x + _FlowSpeed * _Time.x + phase, i.uv.y);
-                float flowMask = SAMPLE_TEXTURE2D(_FlowTex, sampler_FlowTex, flowUV);
+                float4 flowMask = SAMPLE_TEXTURE2D(_FlowTex, sampler_FlowTex, flowUV);
 
                 return float4(stripeMask * (_StripeCol + flowMask * _FlowCol),  _Opacity);
             }

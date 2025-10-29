@@ -4965,11 +4965,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6e10fc842c82a19489b60d8bf76173ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Duration: 5
+  Duration: 3
   TickInterval: 0.5
   DamagePerTick: 5
-  PullStrength: 0.08
-  Radius: 8.34
+  PullStrength: 0.03
+  Radius: 4
   AffectedLayers:
     serializedVersion: 2
     m_Bits: 512

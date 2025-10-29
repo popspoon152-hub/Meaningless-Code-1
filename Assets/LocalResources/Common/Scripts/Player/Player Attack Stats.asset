@@ -24,8 +24,8 @@ MonoBehaviour:
   - 0.2
   AttackBuffer: 0.1
   AttackRange:
-  - 6.5
-  - 5
+  - 7
+  - 8
   - 11
   AttackLittleDash:
   - 1

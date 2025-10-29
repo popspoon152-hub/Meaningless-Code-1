@@ -117,6 +117,9 @@ public class StartPageVideo : MonoBehaviour
     private void ExitStartPage()
     {
         StartButton.gameObject.SetActive(false);
+        VolumeSlider.gameObject.SetActive(false);
+        VolumeImage.gameObject.SetActive(false);
+        CurrentAudio.Stop();
 
         StartCoroutine(PlayExitVideoAndLoadScene());
         StartCoroutine(FadeOut());
@@ -151,7 +154,7 @@ public class StartPageVideo : MonoBehaviour
 
         // ���س���
         CurrentAudio.Stop();
-        SceneManager.LoadScene("FirstStagePage");
+        SceneManager.LoadScene("GalBeforeFirstStage");
     }
 
 

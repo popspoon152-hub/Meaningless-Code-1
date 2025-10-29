@@ -1,24 +1,23 @@
-Shader "Custom/ScanLine"
+Shader "Universal Render Pipeline/PixelShader"
 {
     Properties
     {
-        _MainTex ("MaintTex", 2D) = "white" {}
-        _Frequency("Frequency",Float)=0
-        _Threshold("Threshold",Range(0,1.0))=0
-        _Amount("Amount",Range(0,1.0))=0.5
+        _MainTex ("MainTex", 2D) = "white" {}
+        _PixelInterval("PixelInterval",Range(0.000001,1.0))=1.0//像素化强度
+        _Indensity("Indensity",Range(0,1))=1.0 //影响强度
     }
     SubShader
     {
         Tags{
-            "RenderType"="Opaque"
-            "RenderPipeline"="UniversalRenderPipeline"
+            "RenderType" = "Transparent"
+            "RenderPipeline" = "UniversalPipeline"
+            "Queue" = "Transparent"
         }
         Cull Off
         ZWrite Off
 		Blend SrcAlpha OneMinusSrcAlpha
         Pass
         {
-
             HLSLPROGRAM
             #pragma vertex vert
             #pragma fragment frag
@@ -30,9 +29,8 @@ Shader "Custom/ScanLine"
             CBUFFER_START(UnityPerMaterial)
                 float4 _MainTex_ST;
             CBUFFER_END
-            float _Frequency;
-            float _Threshold;
-            float _Amount;
+            float _PixelInterval;
+            float _Indensity;
 
             struct Attributes 
             {
@@ -44,9 +42,8 @@ Shader "Custom/ScanLine"
             {
                 float4 pos : SV_POSITION;
                 float3 worldPos : TEXCOORD0;
-                float2 uv : TEXCOORD1;
+                float2 uv : TEXCOORD4;
             };
-
             Varyings vert(Attributes i) 
             {
                 Varyings output;
@@ -56,27 +53,15 @@ Shader "Custom/ScanLine"
                 return output;
             }
 
-            float randomNoise(float x, float y)
-            {
-                return frac(sin(dot(float2(x, y), float2(12.9898, 78.233))) * 43758.5453);
-            }
-
             half4 frag(Varyings i) : SV_Target
             {
-                half strength = 0;
-		        #if USING_FREQUENCY_INFINITE
-			        strength = 1;
-		        #else
-			    strength = 0.5 + 0.5 * cos(_Time.y * _Frequency);
-		        #endif
-		        float jitter = randomNoise(i.uv.y, _Time.x) * 2 - 1;
-		        jitter *= step(_Threshold, abs(jitter)) * _Amount * strength;
-		
-		        half4 Color = SAMPLE_TEXTURE2D(_MainTex, sampler_MainTex, frac(i.uv + float2(jitter, 0)));
-		
-		        return Color;
+                float2 pixelAmount = 1/_PixelInterval;
+                float2 pixelAmount_Int=pixelAmount-frac(pixelAmount);//得到像素格数
+                float2 pixelatedUV= floor(i.uv*pixelAmount_Int)/pixelAmount_Int;
+                float2 use_uv=lerp(i.uv,pixelatedUV,_Indensity);
+                half4 Pixelate=SAMPLE_TEXTURE2D(_MainTex,sampler_MainTex,use_uv);
+                return Pixelate;
             }
-
             ENDHLSL
         }
     }

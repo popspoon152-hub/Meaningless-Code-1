@@ -1,4 +1,4 @@
-Shader "Custom/HoleRotation"  
+Shader "Universal Render Pipeline/HoleRotation"  
 {
     Properties  
     {
@@ -8,7 +8,10 @@ Shader "Custom/HoleRotation"
     }  
     SubShader  
     {  
-        tags{"Queue" = "Transparent" "RenderType" = "Transparent" "IgnoreProjector" = "True"} 
+        tags{"RenderType" = "Transparent"
+            "RenderPipeline" = "UniversalPipeline"
+            "Queue" = "Transparent"
+            "IgnoreProjector" = "True"} 
         Blend SrcAlpha OneMinusSrcAlpha  
         Pass  
         { 

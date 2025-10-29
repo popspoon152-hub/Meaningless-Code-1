@@ -1,4 +1,4 @@
-Shader "Custom/PlayerShader"
+Shader "Universal Render Pipeline/PlayerShader"
 {
     Properties
     {
@@ -160,7 +160,7 @@ Shader "Custom/PlayerShader"
                 #endif
 
                 #if defined(_ISDEAD_ON)
-                float3 mainCol = SAMPLE_TEXTURE2D(_MainTex, sampler_NoiseTex, i.uv);;
+                float4 mainCol = SAMPLE_TEXTURE2D(_MainTex, sampler_NoiseTex, i.uv);;
                 
                 float offset = frac(_Time.x * _ShatterSpeed);
 
