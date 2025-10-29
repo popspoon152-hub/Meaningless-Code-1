@@ -1,26 +1,25 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditorInternal;
 using UnityEngine;
 
 #region Enum
 public enum BossState
 {
-    //³Ô¶¹»·½Ú×´Ì¬
-    EatBeans,            //³Ô¶¹
-    EatBeansRangedAttack, //³Ô¶¹»·½ÚÔ¶³Ì¹¥»÷
+    //ï¿½Ô¶ï¿½ï¿½ï¿½ï¿½ï¿½×´Ì¬
+    EatBeans,            //ï¿½Ô¶ï¿½
+    EatBeansRangedAttack, //ï¿½Ô¶ï¿½ï¿½ï¿½ï¿½ï¿½Ô¶ï¿½Ì¹ï¿½ï¿½ï¿½
 
-    //¹¥»÷ÀàÐÍ×´Ì¬
-    AttackIdle,          //¹¥»÷´ý»ú
-    RangedAttack,       //Ô¶³Ì¹¥»÷
-    DashAttack,         //³å·æ¹¥»÷
-    AttackRandomMove,   //¹¥»÷ÀàÐÍµÄÒÆ¶¯
+    //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½×´Ì¬
+    AttackIdle,          //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+    RangedAttack,       //Ô¶ï¿½Ì¹ï¿½ï¿½ï¿½
+    DashAttack,         //ï¿½ï¿½æ¹¥ï¿½ï¿½
+    AttackRandomMove,   //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Íµï¿½ï¿½Æ¶ï¿½
 
-    //Í¨ÓÃÀàÐÍ×´Ì¬
-    Hurt,               //ÊÜÉË
-    Die,                //ËÀÍö
-    Grow,               //ÉßÉí±ä³¤Ò»½Ú
+    //Í¨ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½×´Ì¬
+    Hurt,               //ï¿½ï¿½ï¿½ï¿½
+    Die,                //ï¿½ï¿½ï¿½ï¿½
+    Grow,               //ï¿½ï¿½ï¿½ï¿½ï¿½ä³¤Ò»ï¿½ï¿½
 }
 
 #endregion
@@ -35,24 +34,24 @@ public enum EBossRangedAttack { on, off }
 public class BossFirstStateMachine : MonoBehaviour
 {
     #region State Machine Config
-    [Header("×´Ì¬ÅäÖÃ")]
+    [Header("×´Ì¬ï¿½ï¿½ï¿½ï¿½")]
     public BossState startingState = BossState.EatBeans;
     public LayerMask PlayerLayer;
 
-    [Header("µ÷ÊÔÐÅÏ¢")]
+    [Header("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï¢")]
     [SerializeField] private BossState _currentState;
     [SerializeField] private string _currentStateName;
     #endregion
 
-    #region BossÊôÐÔ
-    [Header("ÊôÐÔÅäÖÃ")]
+    #region Bossï¿½ï¿½ï¿½ï¿½
+    [Header("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½")]
     [Range(10f, 1000f)] public float MaxHealth = 100f;
     [Range(1f, 60f)] public float EatBeanMoveSpeed = 3f;
     [Range(1f, 60f)] public float AttackMoveSpeed = 5f;
     private float _currentMoveSpeed;
     [SerializeField] private BossSlider _slider;
 
-    [Header("ÉßµÄ½ÚÊýÅäÖÃ")]
+    [Header("ï¿½ßµÄ½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½")]
     [Range(1f, 20f)] public int StartSnakeSegments = 5;
     [Range(1f, 20f)] public int MaxSnakeSegments = 10;
     public Transform SegmentPrefab;
@@ -60,10 +59,10 @@ public class BossFirstStateMachine : MonoBehaviour
     [HideInInspector] public bool IsMove = true;
     [HideInInspector] public int CurrentSegmentNum;
 
-    [Header("ÊÜ»÷ÅäÖÃ")]
-    [Range(0f, 1f)] public float HurtInvulnerableTime = 0.1f;       //ÊÜ»÷ºóµÄ¶ÌÔÝÎÞµÐÊ±¼ä(±ÜÃâÖØ¸´ÅÐ¶¨)
+    [Header("ï¿½Ü»ï¿½ï¿½ï¿½ï¿½ï¿½")]
+    [Range(0f, 1f)] public float HurtInvulnerableTime = 0.1f;       //ï¿½Ü»ï¿½ï¿½ï¿½Ä¶ï¿½ï¿½ï¿½ï¿½Þµï¿½Ê±ï¿½ï¿½(ï¿½ï¿½ï¿½ï¿½ï¿½Ø¸ï¿½ï¿½Ð¶ï¿½)
 
-    [Header("Åö×²ÉËº¦")]
+    [Header("ï¿½ï¿½×²ï¿½Ëºï¿½")]
     [Range(1f, 50f)] public float HitDamage = 15f;
     private float _playerInvulnerableTime = 0.2f;
     private bool _canHurt = true;
@@ -74,12 +73,12 @@ public class BossFirstStateMachine : MonoBehaviour
 
 
     #region BossEatBeansRangedAttackState_First
-    [Header("BossEatBeansRangedAttackState_FirstµÄ×Óµ¯")]
+    [Header("BossEatBeansRangedAttackState_Firstï¿½ï¿½ï¿½Óµï¿½")]
     public GameObject BulletPrefab;
     public Transform FirePoint;
     [Range(1f, 30f)] public float BulletSpeed = 5f;
 
-    [Header("BossEatBeansRangedAttackState_FirstµÄBoss³öÕÐ½©Ö±Ê±¼ä")]
+    [Header("BossEatBeansRangedAttackState_Firstï¿½ï¿½Bossï¿½ï¿½ï¿½Ð½ï¿½Ö±Ê±ï¿½ï¿½")]
     [Range(0f, 2f)] public float EatBeansRangedAttackInvulnerableTime;
     #endregion
 
@@ -90,8 +89,8 @@ public class BossFirstStateMachine : MonoBehaviour
 
     #region BossEatBeansState_First
     [Header("BossEatBeansState_First")]
-    [Range(0.5f, 2f)] public float RepathInterval = 0.5f;                  // ¶¨ÆÚÖØËãÂ·¾¶£¬·ÀÖ¹ÕÏ°­/¶¹×ÓÒÆ¶¯µ¼ÖÂÂ·¾¶Ê§Ð§
-    [Range(0.1f, 10f)] public float EatDistance = 1f;                     // µ½´ï´Ë¾àÀëÊÓÎª¡°³Ôµô¡±¶¹×Ó
+    [Range(0.5f, 2f)] public float RepathInterval = 0.5f;                  // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Â·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö¹ï¿½Ï°ï¿½/ï¿½ï¿½ï¿½ï¿½ï¿½Æ¶ï¿½ï¿½ï¿½ï¿½ï¿½Â·ï¿½ï¿½Ê§Ð§
+    [Range(0.1f, 10f)] public float EatDistance = 1f;                     // ï¿½ï¿½ï¿½ï¿½Ë¾ï¿½ï¿½ï¿½ï¿½ï¿½Îªï¿½ï¿½ï¿½Ôµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 
     public LayerMask BeanLayer;
     #endregion
@@ -99,32 +98,32 @@ public class BossFirstStateMachine : MonoBehaviour
 
 
     #region BossAttackIdleState_First
-    [Header("BossAttackIdleState_FirstÖÐBossµÄÎ»ÖÃÉè¶¨")]
+    [Header("BossAttackIdleState_Firstï¿½ï¿½Bossï¿½ï¿½Î»ï¿½ï¿½ï¿½è¶¨")]
     public Transform IdleLeftTransfrom;
     public Transform IdleRightTransfrom;
 
-    [Header("BossAttackIdleState_FirstÖÐBossµÄ½©Ö±Ê±¼ä")]
+    [Header("BossAttackIdleState_Firstï¿½ï¿½Bossï¿½Ä½ï¿½Ö±Ê±ï¿½ï¿½")]
     [Range(1f, 5f)] public float IdleTime = 2f;
     #endregion
 
     #region BossRangedAttackState_First
-    [Header("BossRangedAttackState_FirstµÄ×Óµ¯")]
+    [Header("BossRangedAttackState_Firstï¿½ï¿½ï¿½Óµï¿½")]
     public GameObject BulletPrefab_Attack;
     public GameObject LittleBulletPrefab_Attack;
     public Transform FirePoint_Attack;
     [Range(1f, 50f)] public float BulletSpeed_Attack = 15f;
     [Range(1f, 50f)] public float LittleBulletSpeed_Attack = 17f;
 
-    [Header("BossRangedAttackState_FirstµÄBoss³öÕÐ½©Ö±Ê±¼ä")]
+    [Header("BossRangedAttackState_Firstï¿½ï¿½Bossï¿½ï¿½ï¿½Ð½ï¿½Ö±Ê±ï¿½ï¿½")]
     [Range(0f, 2f)] public float RangedAttackInvulnerableTime;
     #endregion
 
     #region BossDashAttackState_First
-    [Header("³å×²¹¥»÷Ïà¹Ø")]
+    [Header("ï¿½ï¿½×²ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½")]
     public Transform TelePortLeftPoint;
     public Transform TelePortRightPoint;
 
-    [Header("³å´ÌµÄ½áÊøÎ»ÖÃ")]
+    [Header("ï¿½ï¿½ÌµÄ½ï¿½ï¿½ï¿½Î»ï¿½ï¿½")]
     public Transform DashEndLeftPoint;
     public Transform DashEndRightPoint;
     public float DashTargetCheckLength = 1f;
@@ -132,8 +131,8 @@ public class BossFirstStateMachine : MonoBehaviour
     #endregion
 
     #region BossAttackRandomMoveState_First
-    [Header("BossAttackRandomMoveState_First¹¥»÷Ïà¹Ø")]
-    public Transform AttackRandomMoveJumpLeftPostion;      //Ìøµ½µÄÎ»ÖÃ
+    [Header("BossAttackRandomMoveState_Firstï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½")]
+    public Transform AttackRandomMoveJumpLeftPostion;      //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Î»ï¿½ï¿½
     public Transform AttackRandomMoveJumpRightPostion;
     
     public Transform AttackRandomMoveStartPostionLeftPoint;
@@ -151,7 +150,7 @@ public class BossFirstStateMachine : MonoBehaviour
 
 
     #region BossDieState_First
-    [Header("BossDieState_FirstµÄBoss³öÕÐ½©Ö±Ê±¼ä")]
+    [Header("BossDieState_Firstï¿½ï¿½Bossï¿½ï¿½ï¿½Ð½ï¿½Ö±Ê±ï¿½ï¿½")]
     [Range(0f, 2f)] public float DieInvulnerableTime;
     public Transform BossDieTransform;
     public GameObject RewardPrefab;
@@ -162,7 +161,7 @@ public class BossFirstStateMachine : MonoBehaviour
 
 
     #region private fields
-    // ÔËÐÐÊ±×Ö¶Î
+    // ï¿½ï¿½ï¿½ï¿½Ê±ï¿½Ö¶ï¿½
     private bool _isInvulnerable = false;
     private Coroutine _hurtCoroutine;
 
@@ -173,11 +172,11 @@ public class BossFirstStateMachine : MonoBehaviour
         set {  _currentMoveSpeed = value; }
     }
 
-    // ×´Ì¬×Öµä
+    // ×´Ì¬ï¿½Öµï¿½
     private Dictionary<BossState, IBossStateFirstStage> _states;
     private IBossStateFirstStage _currentStateInstance;
 
-    // ×é¼þÒýÓÃ£¨ËùÓÐ×´Ì¬¹²Ïí£©
+    // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ã£ï¿½ï¿½ï¿½ï¿½ï¿½×´Ì¬ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
     public Animator Animator { get; private set; }
     public Transform Player { get; private set; }
     public Rigidbody2D Rb { get; private set; }
@@ -189,12 +188,12 @@ public class BossFirstStateMachine : MonoBehaviour
     #region LifeCycle
     void Awake()
     {
-        // »ñÈ¡×é¼þÒýÓÃ
+        // ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
         Animator = GetComponent<Animator>();
         Rb = GetComponent<Rigidbody2D>();
         Player = GameObject.FindGameObjectWithTag("Player").transform;
 
-        // ³õÊ¼»¯×´Ì¬×Öµä
+        // ï¿½ï¿½Ê¼ï¿½ï¿½×´Ì¬ï¿½Öµï¿½
         _states = new Dictionary<BossState, IBossStateFirstStage>
         {
             { BossState.EatBeans, new BossEatBeansState_First() },
@@ -213,7 +212,7 @@ public class BossFirstStateMachine : MonoBehaviour
 
     void Start()
     {
-        Segments.Add(this.transform); // Ìí¼ÓÍ·²¿×÷ÎªµÚÒ»½Ú
+        Segments.Add(this.transform); // ï¿½ï¿½ï¿½ï¿½Í·ï¿½ï¿½ï¿½ï¿½Îªï¿½ï¿½Ò»ï¿½ï¿½
 
         //for (int i = 1; i <= StartSnakeSegments; i++)
         //{
@@ -225,7 +224,7 @@ public class BossFirstStateMachine : MonoBehaviour
         for (int i = 1; i <= StartSnakeSegments; i++)
         {
             Transform segment = Instantiate(SegmentPrefab);
-            // ÉèÖÃ³õÊ¼Î»ÖÃ£¬È·±£¹Ø½ÚÖ®¼äÓÐÊÊµ±¾àÀë
+            // ï¿½ï¿½ï¿½Ã³ï¿½Ê¼Î»ï¿½Ã£ï¿½È·ï¿½ï¿½ï¿½Ø½ï¿½Ö®ï¿½ï¿½ï¿½ï¿½ï¿½Êµï¿½ï¿½ï¿½ï¿½ï¿½
             Vector3 spawnPos = Segments[Segments.Count - 1].position - Vector3.up * 9f * i;
             segment.position = spawnPos;
 
@@ -236,7 +235,7 @@ public class BossFirstStateMachine : MonoBehaviour
         CurrentMoveSpeed = EatBeanMoveSpeed;
         CurrentSegmentNum = Segments.Count;
 
-        // ³õÊ¼×´Ì¬
+        // ï¿½ï¿½Ê¼×´Ì¬
         ChangeState(startingState);
     }
 
@@ -271,14 +270,14 @@ public class BossFirstStateMachine : MonoBehaviour
 
     #region ChangeState
 
-    // ×´Ì¬ÇÐ»»·½·¨
+    // ×´Ì¬ï¿½Ð»ï¿½ï¿½ï¿½ï¿½ï¿½
     public void ChangeState(BossState newState)
     {
 
-        // ÍË³öµ±Ç°×´Ì¬
+        // ï¿½Ë³ï¿½ï¿½ï¿½Ç°×´Ì¬
         _currentStateInstance?.ExitState();
 
-        // »ñÈ¡ÐÂ×´Ì¬ÊµÀý
+        // ï¿½ï¿½È¡ï¿½ï¿½×´Ì¬Êµï¿½ï¿½
         if (_states.TryGetValue(newState, out IBossStateFirstStage nextState))
         {
             _currentStateInstance = nextState;
@@ -286,7 +285,7 @@ public class BossFirstStateMachine : MonoBehaviour
             _currentStateName = newState.ToString();
 
 
-            // ½øÈëÐÂ×´Ì¬
+            // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½×´Ì¬
             _currentStateInstance.EnterState(this);
         }
     }
@@ -299,7 +298,7 @@ public class BossFirstStateMachine : MonoBehaviour
     {
         if (Segments == null || Segments.Count < 2) return;
 
-        float segmentSpacing = 4.5f; // ¹Ø½Ú¼ä¾à
+        float segmentSpacing = 4.5f; // ï¿½Ø½Ú¼ï¿½ï¿½
         float followSpeed = CurrentMoveSpeed;
 
         for (int i = 1; i < Segments.Count; i++)
@@ -310,14 +309,14 @@ public class BossFirstStateMachine : MonoBehaviour
             Vector2 targetPosition = (Vector2)previousSegment.position -
                                     ((Vector2)(previousSegment.position - currentSegment.position)).normalized * segmentSpacing;
 
-            // Ê¹ÓÃÆ½»¬ÒÆ¶¯
+            // Ê¹ï¿½ï¿½Æ½ï¿½ï¿½ï¿½Æ¶ï¿½
             Vector2 newPosition = Vector2.Lerp(
                 currentSegment.position,
                 targetPosition,
                 followSpeed * Time.fixedDeltaTime
             );
 
-            //»òÕßÊ¹ÓÃ MoveTowards »ñµÃ¸ü¾«È·µÄ¿ØÖÆ
+            //ï¿½ï¿½ï¿½ï¿½Ê¹ï¿½ï¿½ MoveTowards ï¿½ï¿½Ã¸ï¿½ï¿½ï¿½È·ï¿½Ä¿ï¿½ï¿½ï¿½
             //Vector2 newPosition = Vector2.MoveTowards(
             //    currentSegment.position,
             //    targetPosition,
@@ -327,7 +326,7 @@ public class BossFirstStateMachine : MonoBehaviour
 
             currentSegment.position = newPosition;
 
-            //// ¼òµ¥µÄ2DÐý×ª
+            //// ï¿½òµ¥µï¿½2Dï¿½ï¿½×ª
             //Vector2 direction = (Vector2)(previousSegment.position - currentSegment.position);
             //if (direction.sqrMagnitude > 0.01f)
             //{
@@ -358,7 +357,7 @@ public class BossFirstStateMachine : MonoBehaviour
     #endregion
 
     #region Player Take Damage
-    // ±»Íæ¼Ò¹¥»÷Ê±µ÷ÓÃ
+    // ï¿½ï¿½ï¿½ï¿½Ò¹ï¿½ï¿½ï¿½Ê±ï¿½ï¿½ï¿½ï¿½
     public void TakeDamage(float damage)
     {
         if (_currentState == BossState.Die) return;
@@ -394,7 +393,7 @@ public class BossFirstStateMachine : MonoBehaviour
     {
         _isInvulnerable = true;
         bool prevMove = IsMove;
-        IsMove = false; // ÊÜ»÷Ê±Í£Ö¹ÒÆ¶¯£¨¸÷×´Ì¬Ó¦×¢Òâ IsMove£©
+        IsMove = false; // ï¿½Ü»ï¿½Ê±Í£Ö¹ï¿½Æ¶ï¿½ï¿½ï¿½ï¿½ï¿½×´Ì¬Ó¦×¢ï¿½ï¿½ IsMoveï¿½ï¿½
 
         yield return new WaitForSeconds(HurtInvulnerableTime);
 
@@ -407,7 +406,7 @@ public class BossFirstStateMachine : MonoBehaviour
 
     #region Animation Events
 
-    // ¶¯»­ÊÂ¼þ»Øµ÷
+    // ï¿½ï¿½ï¿½ï¿½ï¿½Â¼ï¿½ï¿½Øµï¿½
     public void OnAnimationEvent(string eventName)
     {
         _currentStateInstance?.OnAnimationEvent(eventName);

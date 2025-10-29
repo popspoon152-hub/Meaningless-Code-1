@@ -3,7 +3,6 @@ using System.Collections;
 using System.Threading;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.InputSystem.iOS;
 
 [RequireComponent(typeof(Rigidbody2D))]
 public class LaserSkillEightWay : MonoBehaviour
@@ -11,34 +10,34 @@ public class LaserSkillEightWay : MonoBehaviour
     public PlayerMovement Movement;
     public LaserSlider Slider;
 
-    [Header("¼¤¹â²ÎÊý")]
+    [Header("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½")]
     public float laserLength = 5f;
     public float laserWidth = 0.2f;
     public float laserDuration = 0.4f;
-    [Range(1f,10f)]public float laserCollDownTime = 5f;              //¼¤¹âµÄÀäÈ´
+    [Range(1f,10f)]public float laserCollDownTime = 5f;              //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È´
     private float _laserTimer;
 
-    [Header("Ç°ºóÒ¡Óëºó³·")]
+    [Header("Ç°ï¿½ï¿½Ò¡ï¿½ï¿½ï¿½")]
     public float preCastTime = 0.25f;
     public float postCastTime = 0.25f;
-    public float backStepForce = 6f; // ¡û ÓÃÁ¦´óÐ¡´úÌæ¾àÀëÓëÊ±¼ä
+    public float backStepForce = 6f; // ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½
 
-    [Header("ÒýÓÃ")]
+    [Header("ï¿½ï¿½ï¿½ï¿½")]
     public Transform firePoint;
     public GameObject laserPrefab;
-    public MonoBehaviour moveScriptToDisable; // PlayMove ½Å±¾
+    public MonoBehaviour moveScriptToDisable; // PlayMove ï¿½Å±ï¿½
     public PlayerDirection directionController;
 
     private Rigidbody2D rb;
     private PlayerInputControls PlayerInputControls;
     private bool isCasting = false;
 
-    // ¼ÇÂ¼Ô­Ê¼Ô¼Êø
+    // ï¿½ï¿½Â¼Ô­Ê¼Ô¼ï¿½ï¿½
     private RigidbodyConstraints2D originalConstraints;
 
     [Header("Anim")]
     public Animator Anim;
-    public float AnimOffset = 0.5f;     //animµÄÐÞÕýÖµ
+    public float AnimOffset = 0.5f;     //animï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Öµ
 
     private void Awake()
     {
@@ -68,12 +67,12 @@ public class LaserSkillEightWay : MonoBehaviour
     {
         isCasting = true;
 
-        // Ëø¶¨YÖá£¨Ðü¸¡£©
+        // ï¿½ï¿½ï¿½ï¿½Yï¿½á£¨ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
         originalConstraints = rb.constraints;
         rb.constraints = RigidbodyConstraints2D.FreezePositionY | RigidbodyConstraints2D.FreezeRotation;
         rb.velocity = Vector2.zero;
 
-        // ½ûÖ¹ÒÆ¶¯
+        // ï¿½ï¿½Ö¹ï¿½Æ¶ï¿½
         if (moveScriptToDisable != null) moveScriptToDisable.enabled = false;
 
 
@@ -85,16 +84,16 @@ public class LaserSkillEightWay : MonoBehaviour
 
         yield return new WaitForSeconds(laserDuration);
 
-        // Á¢¼´ºó³·£ºÊ©¼Ó·´·½ÏòµÄÁ¦
+        // ï¿½ï¿½ï¿½ï¿½ï¿½ó³·£ï¿½Ê©ï¿½Ó·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
         //Vector2 recoil = -dir.normalized * backStepForce;
         //rb.AddForce(recoil, ForceMode2D.Impulse);
 
-        // ½âËøYÖá
+        // ï¿½ï¿½ï¿½ï¿½Yï¿½ï¿½
         rb.constraints = originalConstraints;
 
         yield return new WaitForSeconds(postCastTime);
 
-        // »Ö¸´ÒÆ¶¯
+        // ï¿½Ö¸ï¿½ï¿½Æ¶ï¿½
         if (moveScriptToDisable != null) moveScriptToDisable.enabled = true;
         isCasting = false;
 
@@ -102,7 +101,7 @@ public class LaserSkillEightWay : MonoBehaviour
     }
 
     /// <summary>
-    /// ¸ù¾ÝÊó±êÎ»ÖÃÉè¶¨¼¤¹âÇ°Ò¡µÄ¶¯»­
+    /// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Î»ï¿½ï¿½ï¿½è¶¨ï¿½ï¿½ï¿½ï¿½Ç°Ò¡ï¿½Ä¶ï¿½ï¿½ï¿½
     /// </summary>
     /// <exception></exception>
     private void SetPreAnim()
@@ -112,52 +111,52 @@ public class LaserSkillEightWay : MonoBehaviour
 
         if(mousePos.x > playerPos.x)
         {
-            //ÓÒ
+            //ï¿½ï¿½
             Anim.SetTrigger("Right");
         }
         else
         {
-            //×ó
+            //ï¿½ï¿½
             Anim.SetTrigger("Left");
         }
         //if(mousePos.x < playerPos.x - AnimOffset && playerPos.y - AnimOffset < mousePos.y && mousePos.y < playerPos.y + AnimOffset)
         //{
-        //    //×ó
+        //    //ï¿½ï¿½
         //    Anim.SetTrigger("Left");
         //}
         //else if(mousePos.x > playerPos.x + AnimOffset && playerPos.y - AnimOffset < mousePos.y && mousePos.y < playerPos.y + AnimOffset)
         //{
-        //    //ÓÒ
+        //    //ï¿½ï¿½
         //    Anim.SetTrigger("Right");
         //}
         //else if(mousePos.x < playerPos.x - AnimOffset && mousePos.y > playerPos.y + AnimOffset)
         //{
-        //    //×óÉÏ
+        //    //ï¿½ï¿½ï¿½ï¿½
         //    Anim.SetTrigger("LeftUp");
         //}
         //else if (mousePos.x > playerPos.x + AnimOffset && mousePos.y > playerPos.y + AnimOffset)
         //{
-        //    //ÓÒÉÏ
+        //    //ï¿½ï¿½ï¿½ï¿½
         //    Anim.SetTrigger("RightUp");
         //}
         //else if (mousePos.x < playerPos.x - AnimOffset && mousePos.y < playerPos.y - AnimOffset)
         //{
-        //    //×óÏÂ
+        //    //ï¿½ï¿½ï¿½ï¿½
         //    Anim.SetTrigger("LeftDown");
         //}
         //else if (mousePos.x > playerPos.x + AnimOffset && mousePos.y < playerPos.y - AnimOffset)
         //{
-        //    //ÓÒÏÂ
+        //    //ï¿½ï¿½ï¿½ï¿½
         //    Anim.SetTrigger("RightDown");
         //}
         //else if (playerPos.x - AnimOffset < mousePos.x && mousePos.x < playerPos.x + AnimOffset && mousePos.y > playerPos.y + AnimOffset)
         //{
-        //    //ÉÏ
+        //    //ï¿½ï¿½
         //    Anim.SetTrigger("Up");
         //}
         //else if(playerPos.x - AnimOffset < mousePos.x && mousePos.x < playerPos.x + AnimOffset && mousePos.y < playerPos.y - AnimOffset)
         //{
-        //    //ÏÂ
+        //    //ï¿½ï¿½
         //    Anim.SetTrigger("Down");
         //}
         //else
@@ -165,22 +164,22 @@ public class LaserSkillEightWay : MonoBehaviour
         //    Vector2 posVector = mousePos - playerPos;
         //    if(posVector.x > 0 && posVector.y > 0)
         //    {
-        //        //ÓÒÉÏ
+        //        //ï¿½ï¿½ï¿½ï¿½
         //        Anim.SetTrigger("RightUp");
         //    }
         //    else if (posVector.x > 0 && posVector.y < 0)
         //    {
-        //        //ÓÒÏÂ
+        //        //ï¿½ï¿½ï¿½ï¿½
         //        Anim.SetTrigger("RightDown");
         //    }
         //    else if (posVector.x < 0 && posVector.y > 0)
         //    {
-        //        //×óÉÏ
+        //        //ï¿½ï¿½ï¿½ï¿½
         //        Anim.SetTrigger("LeftUp");
         //    }
         //    else
         //    {
-        //        //×óÏÂ
+        //        //ï¿½ï¿½ï¿½ï¿½
         //        Anim.SetTrigger("LeftDown");
         //    }
         //}
@@ -190,11 +189,11 @@ public class LaserSkillEightWay : MonoBehaviour
     {
         if (directionController == null)
         {
-            Debug.LogWarning("[LaserSkill] Î´°ó¶¨ PlayerDirectionController¡£Ä¬ÈÏÏòÓÒ¡£");
+            Debug.LogWarning("[LaserSkill] Î´ï¿½ï¿½ PlayerDirectionControllerï¿½ï¿½Ä¬ï¿½ï¿½ï¿½ï¿½ï¿½Ò¡ï¿½");
             return Vector2.right;
         }
 
-        // ÈôÓÐ·½ÏòÊäÈë£¬ÔòÓÃÊäÈë·½Ïò£¬·ñÔòÓÃµ±Ç°³¯Ïò
+        // ï¿½ï¿½ï¿½Ð·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ë£¬ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ë·½ï¿½ò£¬·ï¿½ï¿½ï¿½ï¿½Ãµï¿½Ç°ï¿½ï¿½ï¿½ï¿½
         if (directionController.hasInput)
             return directionController.directionState.normalized;
         else
