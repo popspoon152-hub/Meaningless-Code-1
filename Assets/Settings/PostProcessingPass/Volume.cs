@@ -5,7 +5,7 @@ using UnityEngine.Rendering.Universal;
 [Serializable, VolumeComponentMenu("PostProcessing/EdgeDetecteion")]
 public class EdgeDetecteion : VolumeComponent, IPostProcessComponent
 {
-    [Tooltip("是否启用效果")] public BoolParameter enable = new BoolParameter(false);
+    [Tooltip("是否启用效果")] public BoolParameter enable = new BoolParameter(true);
 
     
     [Tooltip("描边颜色")] public ColorParameter EdgeColor = new ColorParameter(Color.white);
@@ -24,7 +24,7 @@ public class EdgeDetecteion : VolumeComponent, IPostProcessComponent
 [Serializable, VolumeComponentMenu("PostProcessing/Nosie")]
 public class Nosie : VolumeComponent, IPostProcessComponent
 {
-    [Tooltip("是否启用效果")] public BoolParameter enable = new BoolParameter(false);
+    [Tooltip("是否启用效果")] public BoolParameter enable = new BoolParameter(true);
     
     [Header("抖动速度")] public FloatParameter speed = new FloatParameter(0f);
     [Header("强度")] public FloatParameter strength = new FloatParameter(0f);
@@ -38,7 +38,7 @@ public class Nosie : VolumeComponent, IPostProcessComponent
 [Serializable, VolumeComponentMenu("PostProcessing/LineBlock")]
 public class LineBlock : VolumeComponent, IPostProcessComponent
 {
-    [Header("是否启用效果")] public BoolParameter enable = new BoolParameter(false);
+    [Header("是否启用效果")] public BoolParameter enable = new BoolParameter(true);
 
     [Header("频率")] public FloatParameter frequency = new FloatParameter(0f);
     [Header("TimeX")] public FloatParameter timeX = new FloatParameter(0f);
@@ -53,7 +53,7 @@ public class LineBlock : VolumeComponent, IPostProcessComponent
 [Serializable, VolumeComponentMenu("PostProcessing/BlockGlitch")]
 public class BlockGlitch : VolumeComponent, IPostProcessComponent
 {
-    [Header("是否启用效果")] public BoolParameter enable = new BoolParameter(false);
+    [Header("是否启用效果")] public BoolParameter enable = new BoolParameter(true);
     [Header("区块大小")] public FloatParameter blockSize = new FloatParameter(0f);
     [Header("抖动速度")] public FloatParameter speed = new FloatParameter(0f);
     [Header("X偏离")] public FloatParameter MaxRGBSplitX = new FloatParameter(0f);
@@ -82,11 +82,11 @@ public class Vignette02 : VolumeComponent, IPostProcessComponent
 [Serializable, VolumeComponentMenu("PostProcessing/Pixelate")]
 public class Pixelate : VolumeComponent, IPostProcessComponent
 {
-    [Tooltip("是否启用效果")] public BoolParameter 开关 = new BoolParameter(false);
+    [Tooltip("是否启用效果")] public BoolParameter 开关 = new BoolParameter(true);
     
     // [Tooltip("列数")] public ClampedIntParameter columnCount = new ClampedIntParameter(10, 0, 1000);
     // [Tooltip("行数")] public ClampedIntParameter rowCount = new ClampedIntParameter(10, 0, 1000);
-    [Tooltip("像素格数")] public ClampedIntParameter 像素格数 = new ClampedIntParameter(10, 0, 1000);
+    [Tooltip("像素格数")] public ClampedIntParameter 像素格数 = new ClampedIntParameter(10, 200, 1000);
     
 
     public bool IsActive() => 开关.value;

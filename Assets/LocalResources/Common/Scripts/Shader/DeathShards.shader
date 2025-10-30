@@ -1,4 +1,4 @@
-Shader "Custom/DeathShards"
+Shader "Universal Render Pipeline/DeathShards"
 {
     Properties
     {
@@ -72,7 +72,7 @@ Shader "Custom/DeathShards"
 
             half4 frag(v2f i) : SV_Target
             {
-                float3 mainCol = SAMPLE_TEXTURE2D(_MainTex, sampler_NoiseTex, i.uv);;
+                float4 mainCol = SAMPLE_TEXTURE2D(_MainTex, sampler_NoiseTex, i.uv);;
                 
                 float offset = frac(_Time.x * _ShatterSpeed);
 
@@ -91,7 +91,7 @@ Shader "Custom/DeathShards"
                 float mask2=1-step(_NoiseThreshold, isVisible * shard2);
                 
                 float3 crack=mask1 * mask2 * _CrackCol;
-                float3 finalCol = mainCol * mask1 + crack;
+                float3 finalCol = mainCol.rgb * mask1 + crack;
                 return float4(finalCol, mask1 );
             }
             ENDHLSL

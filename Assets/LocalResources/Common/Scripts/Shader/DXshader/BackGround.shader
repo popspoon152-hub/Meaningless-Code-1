@@ -1,4 +1,4 @@
-Shader "Custom/BackGround"
+Shader "Universal Render Pipeline/BackGround"
 {
     Properties
     {
@@ -10,9 +10,11 @@ Shader "Custom/BackGround"
     }
     SubShader
     {
-        Tags{
-            "RenderType"="Opaque"
-            "RenderPipeline"="UniversalRenderPipeline"
+        Tags
+        {
+            "RenderType" = "Transparent"
+            "RenderPipeline" = "UniversalPipeline"
+            "Queue" = "Transparent"
         }
         Cull Off
         ZWrite Off

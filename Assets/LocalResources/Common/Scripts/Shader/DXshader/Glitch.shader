@@ -1,4 +1,4 @@
-Shader "Custom/Glitch"
+Shader "Universal Render Pipeline/Glitch"
 {
     Properties
     {
@@ -11,14 +11,20 @@ Shader "Custom/Glitch"
     SubShader
     {
         Tags{
-            "RenderType"="Opaque"
-            "RenderPipeline"="UniversalRenderPipeline"
+            "RenderType" = "Transparent"
+            "RenderPipeline" = "UniversalPipeline"
+            "Queue" = "Transparent"
         }
+        
         Cull Off
         ZWrite Off
         Blend SrcAlpha OneMinusSrcAlpha
+
         Pass
         {
+
+            Tags { "LightMode" = "UniversalForward" }
+        
             HLSLPROGRAM
             #pragma vertex vert
             #pragma fragment frag

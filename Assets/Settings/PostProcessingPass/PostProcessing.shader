@@ -1,4 +1,4 @@
-Shader "PostProcessing"
+Shader "Universal Render Pipeline/PostProcessing"
 {
     Properties
     {
@@ -14,8 +14,9 @@ Shader "PostProcessing"
     {
         Tags
         {
-            "RenderType"="Opaque"
-            "RenderPipeline"="UniversalRenderPipeline"
+            "RenderType" = "Transparent"
+            "RenderPipeline" = "UniversalPipeline"
+            "Queue" = "Transparent"
         }
         Cull Off
         ZWrite Off
@@ -212,17 +213,17 @@ Shader "PostProcessing"
 		        float2 uv = i.uv;
 		
 		        //随机强度梯度线条生成
-		        float truncTime = trunc(randomNoise(_TimeX), 2.0)*_Time.x;
+		        float truncTime = trunc(randomNoise(1.3), 2.0)*_Time.x;
 		        float uv_trunc = randomNoise(trunc(uv.yy, float2(8, 8)) + 100.0 * truncTime);
-                float uv_randomTrunc = 6.0 * trunc(_TimeX, 24.0 * uv_trunc);
+                float uv_randomTrunc = 6.0 * trunc(1.3, 24.0 * uv_trunc);
                 float blockLine_random = 0.5 * randomNoise(trunc(uv.yy + uv_randomTrunc, float2(8 * _LinesWidth, 8 * _LinesWidth)));
                 blockLine_random += 0.5 * randomNoise(trunc(uv.yy + uv_randomTrunc, float2(7, 7)));
                 blockLine_random = blockLine_random * 2.0 - 1.0;   
-                blockLine_random = sign(blockLine_random) * saturate((abs(blockLine_random) - _Amount) / (0.4));
+                blockLine_random = sign(blockLine_random) * saturate((abs(blockLine_random) - 0.8) / (0.4));
 
 		        half4 color = SAMPLE_TEXTURE2D(_MainTex, sampler_MainTex, i.uv);
                 
-		        return color*(1-blockLine_random);//dot(color, half3(0.3, 0.59, 0.11))
+		        return color * ( 1 - blockLine_random );//dot(color, half3(0.3, 0.59, 0.11))
 	        }
             ENDHLSL
         }

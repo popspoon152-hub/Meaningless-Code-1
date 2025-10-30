@@ -14,10 +14,12 @@ public class LaserHurt : MonoBehaviour
             if (other.gameObject.GetComponent<BossFirstStateMachine>() != null)
             {
                 other.gameObject.GetComponent<BossFirstStateMachine>().TakeDamage(damage);
+                PlayerHealth.Ins.Health(damage);
             }
             if(other.gameObject.GetComponent<BossThirdStateMachine>() != null)
             {
                 other.gameObject.GetComponent<BossThirdStateMachine>().TakeDamage(damage);
+                PlayerHealth.Ins.Health(damage);
             }
             
         }

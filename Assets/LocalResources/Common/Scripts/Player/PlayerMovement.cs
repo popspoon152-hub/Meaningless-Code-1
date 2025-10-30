@@ -130,7 +130,7 @@ public class PlayerMovement : MonoBehaviour
             _mr.sharedMaterial.SetFloat("_ShatterSpeed", -8f);
             _mr.sharedMaterial.EnableKeyword("_ISDEAD_ON");
 
-            if (_time >= 2.5)
+            if (_time >= 2)
             {
                 _mr.sharedMaterial.SetFloat("_ShatterSpeed", 0);
                 _mr.sharedMaterial.DisableKeyword("_ISDEAD_ON");
@@ -185,25 +185,25 @@ public class PlayerMovement : MonoBehaviour
 
     private void OnDrawGizmos()
     {
-        if (MoveStats != null && Application.isPlaying)
-        {
-            if (MoveStats.ShowWalkJumpArc)
-            {
-                DrawJumpArc(MoveStats.MaxWalkSpeed, Color.white);
-            }
-            if (MoveStats.ShowRunJumpArc)
-            {
-                DrawJumpArc(MoveStats.MaxRunSpeed, Color.red);
-            }
-            if(MoveStats.ShowDashJumpArc)
-            {
-                DrawDashArc();
-            }
-            if (AttackStats.ShowAttackRangeArc)
-            {
-                DrawAttackArc();
-            }
-        }
+        // if (MoveStats != null && Application.isPlaying)
+        // {
+        //     if (MoveStats.ShowWalkJumpArc)
+        //     {
+        //         DrawJumpArc(MoveStats.MaxWalkSpeed, Color.white);
+        //     }
+        //     if (MoveStats.ShowRunJumpArc)
+        //     {
+        //         DrawJumpArc(MoveStats.MaxRunSpeed, Color.red);
+        //     }
+        //     if(MoveStats.ShowDashJumpArc)
+        //     {
+        //         DrawDashArc();
+        //     }
+        //     if (AttackStats.ShowAttackRangeArc)
+        //     {
+        //         DrawAttackArc();
+        //     }
+        // }
     }
     #endregion
 
@@ -790,7 +790,7 @@ public class PlayerMovement : MonoBehaviour
         if (gameObject.transform.position.y < DropPoint.position.y)
         {
             gameObject.transform.position = BackPoint.position;
-            PlayerHealth.Ins.TakeDamageByPlayer(DropHurt);
+            PlayerHealth.Ins.TakeDamageByEnemy(DropHurt);
         }
     }
     #endregion
@@ -812,90 +812,109 @@ public class PlayerMovement : MonoBehaviour
 
         yield return new WaitForSeconds(1f);
 
-        int index = SceneManager.GetActiveScene().buildIndex;
-        SceneManager.LoadScene(index);
+       float _time = 0;
+       while (true)
+       {
+            _time += Time.deltaTime;
+            yield return new WaitForEndOfFrame();
+            _mr.sharedMaterial.SetFloat("_ShatterSpeed", 5f);
+            _mr.sharedMaterial.EnableKeyword("_ISDEAD_ON");
+
+            if (_time >= 1)
+            {
+                _mr.sharedMaterial.SetFloat("_ShatterSpeed", 0);
+                _mr.sharedMaterial.DisableKeyword("_ISDEAD_ON");
+                
+                int index = SceneManager.GetActiveScene().buildIndex;
+                SceneManager.LoadScene(index);
+                yield break;
+            }
+        }
+
+
+
     }
 
     #endregion
 
     #region Gizmos
-    private void DrawJumpArc(float moveSpeed, Color gizmoColor)
-    {
-        Vector2 startPostion = new Vector2(_feetColl.bounds.center.x, _feetColl.bounds.min.y);
-        Vector2 previousPostion = startPostion;
-        float speed = 0f;
+    // private void DrawJumpArc(float moveSpeed, Color gizmoColor)
+    // {
+    //     Vector2 startPostion = new Vector2(_feetColl.bounds.center.x, _feetColl.bounds.min.y);
+    //     Vector2 previousPostion = startPostion;
+    //     float speed = 0f;
 
-        if (MoveStats.DrawRight)
-        {
-            speed = moveSpeed;
-        }
-        else { speed = -moveSpeed; }
+    //     if (MoveStats.DrawRight)
+    //     {
+    //         speed = moveSpeed;
+    //     }
+    //     else { speed = -moveSpeed; }
 
-        Vector2 velocity = new Vector2(speed, MoveStats.IntialJumpVelocity);
+    //     Vector2 velocity = new Vector2(speed, MoveStats.IntialJumpVelocity);
 
-        Gizmos.color = gizmoColor;
+    //     Gizmos.color = gizmoColor;
 
-        float timeStep = 2 * MoveStats.TimeTillJumpApex / MoveStats.ArcSolution;
+    //     float timeStep = 2 * MoveStats.TimeTillJumpApex / MoveStats.ArcSolution;
 
-        for (int i = 0; i < MoveStats.VisualizationSteps; i++)
-        {
-            float simulationTime = i * timeStep;
-            Vector2 displacement;
-            Vector2 drawPoint;
+    //     for (int i = 0; i < MoveStats.VisualizationSteps; i++)
+    //     {
+    //         float simulationTime = i * timeStep;
+    //         Vector2 displacement;
+    //         Vector2 drawPoint;
 
-            if (simulationTime < MoveStats.TimeTillJumpApex)
-            {
-                displacement = velocity * simulationTime + 0.5f * new Vector2(0f, MoveStats.Gravity) * Mathf.Pow(simulationTime, 2);
-            }
-            else if (simulationTime < MoveStats.TimeTillJumpApex + MoveStats.ApexHangTime)
-            {
-                float apexTime = simulationTime - MoveStats.TimeTillJumpApex;
-                displacement = velocity * MoveStats.TimeTillJumpApex + 0.5f * new Vector2(0f, MoveStats.Gravity) * Mathf.Pow(MoveStats.TimeTillJumpApex, 2)
-                    + new Vector2(velocity.x * apexTime, 0f);
-            }
-            else
-            {
-                float descendTime = simulationTime - (MoveStats.TimeTillJumpApex + MoveStats.ApexHangTime);
-                displacement = velocity * MoveStats.TimeTillJumpApex + 0.5f * new Vector2(0f, MoveStats.Gravity) * Mathf.Pow(MoveStats.TimeTillJumpApex, 2)
-                    + new Vector2(speed * MoveStats.ApexHangTime, 0f)
-                    + new Vector2(speed * descendTime, 0f) + 0.5f * new Vector2(0f, MoveStats.Gravity) * Mathf.Pow(descendTime, 2);
-            }
+    //         if (simulationTime < MoveStats.TimeTillJumpApex)
+    //         {
+    //             displacement = velocity * simulationTime + 0.5f * new Vector2(0f, MoveStats.Gravity) * Mathf.Pow(simulationTime, 2);
+    //         }
+    //         else if (simulationTime < MoveStats.TimeTillJumpApex + MoveStats.ApexHangTime)
+    //         {
+    //             float apexTime = simulationTime - MoveStats.TimeTillJumpApex;
+    //             displacement = velocity * MoveStats.TimeTillJumpApex + 0.5f * new Vector2(0f, MoveStats.Gravity) * Mathf.Pow(MoveStats.TimeTillJumpApex, 2)
+    //                 + new Vector2(velocity.x * apexTime, 0f);
+    //         }
+    //         else
+    //         {
+    //             float descendTime = simulationTime - (MoveStats.TimeTillJumpApex + MoveStats.ApexHangTime);
+    //             displacement = velocity * MoveStats.TimeTillJumpApex + 0.5f * new Vector2(0f, MoveStats.Gravity) * Mathf.Pow(MoveStats.TimeTillJumpApex, 2)
+    //                 + new Vector2(speed * MoveStats.ApexHangTime, 0f)
+    //                 + new Vector2(speed * descendTime, 0f) + 0.5f * new Vector2(0f, MoveStats.Gravity) * Mathf.Pow(descendTime, 2);
+    //         }
 
-            drawPoint = startPostion + displacement;
+    //         drawPoint = startPostion + displacement;
 
-            if (MoveStats.StopOnCollision)
-            {
-                RaycastHit2D hit = Physics2D.Raycast(previousPostion, drawPoint - previousPostion, Vector2.Distance(previousPostion, drawPoint), MoveStats.GroundLayer);
-                if (hit.collider != null)
-                {
-                    Gizmos.DrawLine(previousPostion, hit.point);
-                    break;
-                }
-            }
+    //         if (MoveStats.StopOnCollision)
+    //         {
+    //             RaycastHit2D hit = Physics2D.Raycast(previousPostion, drawPoint - previousPostion, Vector2.Distance(previousPostion, drawPoint), MoveStats.GroundLayer);
+    //             if (hit.collider != null)
+    //             {
+    //                 Gizmos.DrawLine(previousPostion, hit.point);
+    //                 break;
+    //             }
+    //         }
 
-            Gizmos.DrawLine(previousPostion, drawPoint);
-            previousPostion = drawPoint;
-        }
-    }
+    //         Gizmos.DrawLine(previousPostion, drawPoint);
+    //         previousPostion = drawPoint;
+    //     }
+    // }
 
-    private void DrawDashArc()
-    {
-        if (_isFacingRight)
-        {
-            Gizmos.DrawLine(transform.position, new Vector2(transform.position.x + MoveStats.MaxDashLength, transform.position.y));
-        }
-        else
-        {
-            Gizmos.DrawLine(new Vector2(transform.position.x - MoveStats.MaxDashLength, transform.position.y), transform.position);
-        }
-    }
+    // private void DrawDashArc()
+    // {
+    //     if (_isFacingRight)
+    //     {
+    //         Gizmos.DrawLine(transform.position, new Vector2(transform.position.x + MoveStats.MaxDashLength, transform.position.y));
+    //     }
+    //     else
+    //     {
+    //         Gizmos.DrawLine(new Vector2(transform.position.x - MoveStats.MaxDashLength, transform.position.y), transform.position);
+    //     }
+    // }
 
-    private void DrawAttackArc()
-    {
-        if (_currentCombo != 0)
-        {
-            Gizmos.DrawWireSphere(AttackPoints[(int)_currentCombo - 1].position, AttackStats.AttackRange[(int)_currentCombo - 1]);
-        }
-    }
+    // private void DrawAttackArc()
+    // {
+    //     if (_currentCombo != 0)
+    //     {
+    //         Gizmos.DrawWireSphere(AttackPoints[(int)_currentCombo - 1].position, AttackStats.AttackRange[(int)_currentCombo - 1]);
+    //     }
+    // }
     #endregion
 }

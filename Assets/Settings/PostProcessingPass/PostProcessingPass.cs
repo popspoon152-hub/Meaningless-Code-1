@@ -85,8 +85,8 @@ public class EdgeDetecteionPass : PostProcessingUniversalRenderPass<EdgeDetectei
         int dest = TempBufferId1;
 
         //填写你的变量
-        material.SetVector("_EdgeColor", volumeComponent.EdgeColor.value);
-        material.SetFloat("_EdgeWidth", volumeComponent.EdgeWidth.value);
+        material.SetVector("_EdgeColor",Color.black);
+        material.SetFloat("_EdgeWidth",3/10);
         material.SetFloat("_BackgroundFade", volumeComponent.BackgroundFade.value);
         material.SetVector("_BackgroundColor", volumeComponent.BackgroundColor.value);
 
@@ -113,8 +113,8 @@ public class NosiePass : PostProcessingUniversalRenderPass<Nosie>
         var src = cameraData.renderer.cameraColorTargetHandle;
         int dest = TempBufferId1;
 
-        material.SetFloat("_Speed", volumeComponent.speed.value);
-        material.SetFloat("_Strength", volumeComponent.strength.value);
+        material.SetFloat("_Speed", 4/10);
+        material.SetFloat("_Strength",5/10);
 
         cmd.GetTemporaryRT(dest, camera.scaledPixelWidth, camera.scaledPixelHeight, 0, FilterMode.Trilinear, RenderTextureFormat.Default);
         cmd.Blit(src, (RenderTargetIdentifier)dest);
@@ -140,9 +140,9 @@ public class LineBlockPass : PostProcessingUniversalRenderPass<LineBlock>
         int dest = TempBufferId1;
 
         material.SetFloat("_Frequency", volumeComponent.frequency.value);
-        material.SetFloat("_TimeX", volumeComponent.timeX.value);
-        material.SetFloat("_LinesWidth", volumeComponent.lineswidth.value);
-        material.SetFloat("_Amount", volumeComponent.amount.value);
+        material.SetFloat("_TimeX", 130/100);
+        material.SetFloat("_LinesWidth", 50);
+        material.SetFloat("_Amount", 99/100);
         material.SetFloat("_Offest", volumeComponent.offset.value);
         material.SetFloat("_Alpha", volumeComponent.alpha.value);
 
@@ -170,10 +170,10 @@ public class BlockGlitchPass : PostProcessingUniversalRenderPass<BlockGlitch>
         var src = cameraData.renderer.cameraColorTargetHandle;
         int dest = TempBufferId1;
 
-        material.SetFloat("_BlockSize", volumeComponent.blockSize.value);
-        material.SetFloat("_Speed", volumeComponent.speed.value);
-        material.SetFloat("_MaxRGBSplitX", volumeComponent.MaxRGBSplitX.value);
-        material.SetFloat("_MaxRGBSplitY", volumeComponent.MaxRGBSplitY.value);
+        material.SetFloat("_BlockSize", 120);
+        material.SetFloat("_Speed", 15);
+        material.SetFloat("_MaxRGBSplitX", 1/10);
+        material.SetFloat("_MaxRGBSplitY", 1/10);
 
         cmd.GetTemporaryRT(dest, camera.scaledPixelWidth, camera.scaledPixelHeight, 0, FilterMode.Trilinear, RenderTextureFormat.Default);
         cmd.Blit(src, (RenderTargetIdentifier)dest);
@@ -231,7 +231,7 @@ public class PixelatePass : PostProcessingUniversalRenderPass<Pixelate>
         var src = cameraData.renderer.cameraColorTargetHandle;
         int dest = TempBufferId1;
 
-        material.SetFloat("_Interval", volumeComponent.像素格数.value);
+        material.SetFloat("_Interval", 200);
 
         cmd.GetTemporaryRT(dest, camera.scaledPixelWidth, camera.scaledPixelHeight, 0, FilterMode.Trilinear, RenderTextureFormat.Default);
         cmd.Blit(src, (RenderTargetIdentifier)dest);

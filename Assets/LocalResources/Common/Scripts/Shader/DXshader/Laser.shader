@@ -1,21 +1,20 @@
-Shader "Custom/DeadBlock"
+Shader "Universal Render Pipeline/Laser"
 {
     Properties
     {
-        _Tex ("Albedo (RGB)", 2D) = "white" {}
-        _EmissionMask ("EmissionMask", 2D) = "white" {}
-        _Speed("Speed",Float)=1.0
-        [HDR]_Emission("Emission",Color)=(1,1,1,1)
+        _MainTex ("MaintTex", 2D) = "white" {}
+        _LaserMask("LaserMask",2D)="white"{}
+        _LaskTex("LaskTex",2D)="white"{}
     }
     SubShader
     {
         Tags{
-            "RenderType"="Opaque"
-            "RenderPipeline"="UniversalRenderPipeline"
+            "RenderType" = "Transparent"
+            "RenderPipeline" = "UniversalPipeline"
+            "Queue" = "Transparent"
         }
         Cull Off
         ZWrite Off
-		Blend SrcAlpha OneMinusSrcAlpha
         Pass
         {
             HLSLPROGRAM
@@ -24,15 +23,19 @@ Shader "Custom/DeadBlock"
             #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
             #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Lighting.hlsl"
             #include "Packages/com.unity.render-pipelines.core/ShaderLibrary/SpaceTransforms.hlsl"
-            TEXTURE2D(_Tex);
-            SAMPLER(sampler_Tex);
-            TEXTURE2D(_EmissionMask);
-            SAMPLER(sampler_EmissionMask);
-            float4 _Emission;
-            float _Speed;
+            TEXTURE2D(_MainTex);
+            SAMPLER(sampler_MainTex);
+
+            TEXTURE2D(_LaskMask);
+            SAMPLER(sampler_LaskMask);
+
+            TEXTURE2D(_LaskTex);
+            SAMPLER(sampler_LaskTex);
 
             CBUFFER_START(UnityPerMaterial)
-                float4 _Tex_ST;
+                float4 _MainTex_ST;
+                float4 _LaserMask_ST;
+                float4 _LaserTex_ST;
             CBUFFER_END
 
             struct Attributes 
@@ -52,17 +55,19 @@ Shader "Custom/DeadBlock"
                 Varyings output;
                 output.worldPos = TransformObjectToWorld(i.vertex.xyz);
                 output.pos = TransformWorldToHClip(output.worldPos);
-                output.uv = TRANSFORM_TEX(i.texcoord,_Tex);
+                output.uv = TRANSFORM_TEX(i.texcoord,_MainTex);
                 return output;
             }
 
             half4 frag(Varyings i) : SV_Target
             {
-                half4 texcol = SAMPLE_TEXTURE2D(_Tex, sampler_Tex, float2(i.uv.x- _Time.x * _Speed,i.uv.y ));
-                half4 mask = SAMPLE_TEXTURE2D(_EmissionMask, sampler_EmissionMask, float2 ( i.uv.x - _Time.x *_Speed, i.uv.y ) );
-                return texcol * mask * _Emission ;
+                half4 texcol = SAMPLE_TEXTURE2D(_MainTex, sampler_MainTex, i.uv);
+                half4 laskcol = SAMPLE_TEXTURE2D(_LaskTex, sampler_LaskTex, i.uv + _Time.y * 0.5);
+                half4 laskmask = SAMPLE_TEXTURE2D(_LaskMask, sampler_LaskMask, i.uv + _Time.x);
+                return texcol * (laskcol + 1 - laskmask*2);
             }
             ENDHLSL
         }
     }
 }
+

@@ -13,12 +13,12 @@ MonoBehaviour:
   m_Name: Pixelate
   m_EditorClassIdentifier: Assembly-CSharp::Pixelate
   active: 1
-  "\u5F00\u5173":
-    m_OverrideState: 1
-    m_Value: 1
-  "\u50CF\u7D20\u683C\u6570":
-    m_OverrideState: 1
-    m_Value: 250
+  enable:
+    m_OverrideState: 0
+    m_Value: 0
+  intervalCount:
+    m_OverrideState: 0
+    m_Value: 10
 --- !u!114 &-8614612123386498905
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -101,12 +101,12 @@ MonoBehaviour:
   m_Name: Pixelate
   m_EditorClassIdentifier: Assembly-CSharp::Pixelate
   active: 1
-  "\u5F00\u5173":
-    m_OverrideState: 1
-    m_Value: 1
-  "\u50CF\u7D20\u683C\u6570":
-    m_OverrideState: 1
-    m_Value: 250
+  enable:
+    m_OverrideState: 0
+    m_Value: 0
+  intervalCount:
+    m_OverrideState: 0
+    m_Value: 10
 --- !u!114 &-8324584683353286745
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -175,34 +175,6 @@ MonoBehaviour:
   alpha:
     m_OverrideState: 1
     m_Value: 0
---- !u!114 &-8186173970564298259
-MonoBehaviour:
-  m_ObjectHideFlags: 3
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c03d7f077abb0914e8c359f3a07104df, type: 3}
-  m_Name: EdgeDetecteion
-  m_EditorClassIdentifier: 
-  active: 1
-  enable:
-    m_OverrideState: 1
-    m_Value: 1
-  EdgeColor:
-    m_OverrideState: 1
-    m_Value: {r: 0, g: 0, b: 0, a: 1}
-  EdgeWidth:
-    m_OverrideState: 1
-    m_Value: 0.5
-  BackgroundFade:
-    m_OverrideState: 1
-    m_Value: 0
-  BackgroundColor:
-    m_OverrideState: 1
-    m_Value: {r: 1, g: 1, b: 1, a: 1}
 --- !u!114 &-8157928061085646584
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -231,6 +203,40 @@ MonoBehaviour:
   rounded:
     m_OverrideState: 1
     m_Value: 0
+--- !u!114 &-7838523498575694217
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 0}
+  m_Name: LineBlock
+  m_EditorClassIdentifier: Assembly-CSharp::LineBlock
+  active: 1
+  enable:
+    m_OverrideState: 1
+    m_Value: 1
+  frequency:
+    m_OverrideState: 1
+    m_Value: 0
+  timeX:
+    m_OverrideState: 1
+    m_Value: 1.16
+  lineswidth:
+    m_OverrideState: 1
+    m_Value: 50
+  amount:
+    m_OverrideState: 1
+    m_Value: 0.6
+  offset:
+    m_OverrideState: 1
+    m_Value: 0
+  alpha:
+    m_OverrideState: 1
+    m_Value: 0
 --- !u!114 &-7631898502570953300
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -256,6 +262,25 @@ MonoBehaviour:
   amount:
     m_OverrideState: 1
     m_Value: 0
+--- !u!114 &-7154390094420717914
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 0}
+  m_Name: Pixelate
+  m_EditorClassIdentifier: Assembly-CSharp::Pixelate
+  active: 0
+  "\u5F00\u5173":
+    m_OverrideState: 1
+    m_Value: 1
+  "\u50CF\u7D20\u683C\u6570":
+    m_OverrideState: 1
+    m_Value: 200
 --- !u!114 &-6989718611522299449
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -291,12 +316,40 @@ MonoBehaviour:
   m_Name: Pixelate
   m_EditorClassIdentifier: Assembly-CSharp::Pixelate
   active: 1
-  "\u5F00\u5173":
+  enable:
+    m_OverrideState: 0
+    m_Value: 0
+  intervalCount:
+    m_OverrideState: 0
+    m_Value: 10
+--- !u!114 &-6404315272066645065
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c03d7f077abb0914e8c359f3a07104df, type: 3}
+  m_Name: EdgeDetecteion
+  m_EditorClassIdentifier: 
+  active: 1
+  enable:
     m_OverrideState: 1
     m_Value: 1
-  "\u50CF\u7D20\u683C\u6570":
+  EdgeColor:
     m_OverrideState: 1
-    m_Value: 250
+    m_Value: {r: 0, g: 0, b: 0, a: 1}
+  EdgeWidth:
+    m_OverrideState: 1
+    m_Value: 0.3
+  BackgroundFade:
+    m_OverrideState: 1
+    m_Value: 0
+  BackgroundColor:
+    m_OverrideState: 1
+    m_Value: {r: 1, g: 1, b: 1, a: 1}
 --- !u!114 &-6359816972098845670
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -350,12 +403,12 @@ MonoBehaviour:
   m_Name: Pixelate
   m_EditorClassIdentifier: Assembly-CSharp::Pixelate
   active: 1
-  "\u5F00\u5173":
-    m_OverrideState: 1
-    m_Value: 1
-  "\u50CF\u7D20\u683C\u6570":
-    m_OverrideState: 1
-    m_Value: 401
+  enable:
+    m_OverrideState: 0
+    m_Value: 0
+  intervalCount:
+    m_OverrideState: 0
+    m_Value: 10
 --- !u!114 &-5871549656226604703
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -475,12 +528,12 @@ MonoBehaviour:
   m_Name: Pixelate
   m_EditorClassIdentifier: Assembly-CSharp::Pixelate
   active: 1
-  "\u5F00\u5173":
-    m_OverrideState: 1
-    m_Value: 1
-  "\u50CF\u7D20\u683C\u6570":
-    m_OverrideState: 1
-    m_Value: 250
+  enable:
+    m_OverrideState: 0
+    m_Value: 0
+  intervalCount:
+    m_OverrideState: 0
+    m_Value: 10
 --- !u!114 &-4459927555253286115
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -494,12 +547,12 @@ MonoBehaviour:
   m_Name: Pixelate
   m_EditorClassIdentifier: Assembly-CSharp::Pixelate
   active: 1
-  "\u5F00\u5173":
-    m_OverrideState: 1
-    m_Value: 1
-  "\u50CF\u7D20\u683C\u6570":
-    m_OverrideState: 1
-    m_Value: 250
+  enable:
+    m_OverrideState: 0
+    m_Value: 0
+  intervalCount:
+    m_OverrideState: 0
+    m_Value: 10
 --- !u!114 &-4434953030279501615
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -513,12 +566,12 @@ MonoBehaviour:
   m_Name: Pixelate
   m_EditorClassIdentifier: Assembly-CSharp::Pixelate
   active: 1
-  "\u5F00\u5173":
-    m_OverrideState: 1
-    m_Value: 1
-  "\u50CF\u7D20\u683C\u6570":
-    m_OverrideState: 1
-    m_Value: 203
+  enable:
+    m_OverrideState: 0
+    m_Value: 0
+  intervalCount:
+    m_OverrideState: 0
+    m_Value: 10
 --- !u!114 &-4401991626042414164
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -541,6 +594,26 @@ MonoBehaviour:
   strength:
     m_OverrideState: 1
     m_Value: 0.5
+--- !u!114 &-3949697701361088056
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 94ff86091a5621241ae3123d3f3c6454, type: 3}
+  m_Name: Pixelate
+  m_EditorClassIdentifier: 
+  active: 1
+  <displayName>k__BackingField: 
+  enable:
+    m_OverrideState: 1
+    m_Value: 1
+  intervalCount:
+    m_OverrideState: 1
+    m_Value: 200
 --- !u!114 &-3146869625004819834
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -632,12 +705,12 @@ MonoBehaviour:
   m_Name: Pixelate
   m_EditorClassIdentifier: Assembly-CSharp::Pixelate
   active: 1
-  "\u5F00\u5173":
-    m_OverrideState: 1
-    m_Value: 1
-  "\u50CF\u7D20\u683C\u6570":
-    m_OverrideState: 1
-    m_Value: 250
+  enable:
+    m_OverrideState: 0
+    m_Value: 0
+  intervalCount:
+    m_OverrideState: 0
+    m_Value: 10
 --- !u!114 &-1975936294912329634
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -685,12 +758,12 @@ MonoBehaviour:
   m_Name: Pixelate
   m_EditorClassIdentifier: Assembly-CSharp::Pixelate
   active: 1
-  "\u5F00\u5173":
-    m_OverrideState: 1
-    m_Value: 1
-  "\u50CF\u7D20\u683C\u6570":
-    m_OverrideState: 1
-    m_Value: 200
+  enable:
+    m_OverrideState: 0
+    m_Value: 0
+  intervalCount:
+    m_OverrideState: 0
+    m_Value: 10
 --- !u!114 &-1297592900689962653
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -729,12 +802,12 @@ MonoBehaviour:
   m_Name: Pixelate
   m_EditorClassIdentifier: Assembly-CSharp::Pixelate
   active: 1
-  "\u5F00\u5173":
-    m_OverrideState: 1
-    m_Value: 1
-  "\u50CF\u7D20\u683C\u6570":
-    m_OverrideState: 1
-    m_Value: 200
+  enable:
+    m_OverrideState: 0
+    m_Value: 0
+  intervalCount:
+    m_OverrideState: 0
+    m_Value: 10
 --- !u!114 &-969213894550423010
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -748,12 +821,12 @@ MonoBehaviour:
   m_Name: Pixelate
   m_EditorClassIdentifier: Assembly-CSharp::Pixelate
   active: 1
-  "\u5F00\u5173":
-    m_OverrideState: 1
-    m_Value: 1
-  "\u50CF\u7D20\u683C\u6570":
-    m_OverrideState: 1
-    m_Value: 250
+  enable:
+    m_OverrideState: 0
+    m_Value: 0
+  intervalCount:
+    m_OverrideState: 0
+    m_Value: 10
 --- !u!114 &-603694100041520179
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -816,6 +889,62 @@ MonoBehaviour:
   MaxRGBSplitY:
     m_OverrideState: 1
     m_Value: 0.1
+--- !u!114 &-353230696824306738
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 0}
+  m_Name: BlockGlitch
+  m_EditorClassIdentifier: Assembly-CSharp::BlockGlitch
+  active: 1
+  enable:
+    m_OverrideState: 1
+    m_Value: 0
+  blockSize:
+    m_OverrideState: 1
+    m_Value: 1.7
+  speed:
+    m_OverrideState: 1
+    m_Value: 0
+  MaxRGBSplitX:
+    m_OverrideState: 1
+    m_Value: 0
+  MaxRGBSplitY:
+    m_OverrideState: 1
+    m_Value: 0
+--- !u!114 &-167892572114952812
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 0}
+  m_Name: BlockGlitch
+  m_EditorClassIdentifier: Assembly-CSharp::BlockGlitch
+  active: 0
+  enable:
+    m_OverrideState: 1
+    m_Value: 1
+  blockSize:
+    m_OverrideState: 1
+    m_Value: 120
+  speed:
+    m_OverrideState: 1
+    m_Value: 15
+  MaxRGBSplitX:
+    m_OverrideState: 1
+    m_Value: 0.1
+  MaxRGBSplitY:
+    m_OverrideState: 1
+    m_Value: 0.1
 --- !u!114 &-144384827776335854
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -857,12 +986,12 @@ MonoBehaviour:
   m_Name: Pixelate
   m_EditorClassIdentifier: Assembly-CSharp::Pixelate
   active: 1
-  "\u5F00\u5173":
-    m_OverrideState: 1
-    m_Value: 1
-  "\u50CF\u7D20\u683C\u6570":
-    m_OverrideState: 1
-    m_Value: 250
+  enable:
+    m_OverrideState: 0
+    m_Value: 0
+  intervalCount:
+    m_OverrideState: 0
+    m_Value: 10
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -879,11 +1008,11 @@ MonoBehaviour:
   - {fileID: -8157928061085646584}
   - {fileID: -144384827776335854}
   - {fileID: -8614612123386498905}
-  - {fileID: -8186173970564298259}
-  - {fileID: -603694100041520179}
-  - {fileID: 571590124839516258}
-  - {fileID: 6348362939929598260}
-  - {fileID: -5871549656226604703}
+  - {fileID: -7154390094420717914}
+  - {fileID: -167892572114952812}
+  - {fileID: -6404315272066645065}
+  - {fileID: -7838523498575694217}
+  - {fileID: 8460753689689994159}
 --- !u!114 &92097616096746754
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -919,12 +1048,12 @@ MonoBehaviour:
   m_Name: Pixelate
   m_EditorClassIdentifier: Assembly-CSharp::Pixelate
   active: 1
-  "\u5F00\u5173":
-    m_OverrideState: 1
-    m_Value: 1
-  "\u50CF\u7D20\u683C\u6570":
-    m_OverrideState: 1
-    m_Value: 250
+  enable:
+    m_OverrideState: 0
+    m_Value: 0
+  intervalCount:
+    m_OverrideState: 0
+    m_Value: 10
 --- !u!114 &571590124839516258
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -1072,12 +1201,12 @@ MonoBehaviour:
   m_Name: Pixelate
   m_EditorClassIdentifier: Assembly-CSharp::Pixelate
   active: 1
-  "\u5F00\u5173":
-    m_OverrideState: 1
-    m_Value: 1
-  "\u50CF\u7D20\u683C\u6570":
-    m_OverrideState: 1
-    m_Value: 250
+  enable:
+    m_OverrideState: 0
+    m_Value: 0
+  intervalCount:
+    m_OverrideState: 0
+    m_Value: 10
 --- !u!114 &2188420150048170719
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -1180,6 +1309,34 @@ MonoBehaviour:
   alpha:
     m_OverrideState: 1
     m_Value: 0
+--- !u!114 &3436345527255123889
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c03d7f077abb0914e8c359f3a07104df, type: 3}
+  m_Name: EdgeDetecteion
+  m_EditorClassIdentifier: 
+  active: 1
+  enable:
+    m_OverrideState: 1
+    m_Value: 1
+  EdgeColor:
+    m_OverrideState: 1
+    m_Value: {r: 0, g: 0, b: 0, a: 1}
+  EdgeWidth:
+    m_OverrideState: 1
+    m_Value: 0.8
+  BackgroundFade:
+    m_OverrideState: 1
+    m_Value: 0
+  BackgroundColor:
+    m_OverrideState: 1
+    m_Value: {r: 1, g: 1, b: 1, a: 1}
 --- !u!114 &4230874680556378436
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -1249,12 +1406,12 @@ MonoBehaviour:
   m_Name: Pixelate
   m_EditorClassIdentifier: Assembly-CSharp::Pixelate
   active: 1
-  "\u5F00\u5173":
-    m_OverrideState: 1
-    m_Value: 1
-  "\u50CF\u7D20\u683C\u6570":
-    m_OverrideState: 1
-    m_Value: 250
+  enable:
+    m_OverrideState: 0
+    m_Value: 0
+  intervalCount:
+    m_OverrideState: 0
+    m_Value: 10
 --- !u!114 &4764451278166149878
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -1268,12 +1425,12 @@ MonoBehaviour:
   m_Name: Pixelate
   m_EditorClassIdentifier: Assembly-CSharp::Pixelate
   active: 1
-  "\u5F00\u5173":
-    m_OverrideState: 1
-    m_Value: 1
-  "\u50CF\u7D20\u683C\u6570":
-    m_OverrideState: 1
-    m_Value: 250
+  enable:
+    m_OverrideState: 0
+    m_Value: 0
+  intervalCount:
+    m_OverrideState: 0
+    m_Value: 10
 --- !u!114 &5118691769336880521
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -1371,12 +1528,12 @@ MonoBehaviour:
   m_Name: Pixelate
   m_EditorClassIdentifier: Assembly-CSharp::Pixelate
   active: 1
-  "\u5F00\u5173":
-    m_OverrideState: 1
-    m_Value: 1
-  "\u50CF\u7D20\u683C\u6570":
-    m_OverrideState: 1
-    m_Value: 250
+  enable:
+    m_OverrideState: 0
+    m_Value: 0
+  intervalCount:
+    m_OverrideState: 0
+    m_Value: 10
 --- !u!114 &6348362939929598260
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -1390,12 +1547,12 @@ MonoBehaviour:
   m_Name: Pixelate
   m_EditorClassIdentifier: Assembly-CSharp::Pixelate
   active: 1
-  "\u5F00\u5173":
+  enable:
     m_OverrideState: 1
     m_Value: 1
-  "\u50CF\u7D20\u683C\u6570":
+  intervalCount:
     m_OverrideState: 1
-    m_Value: 250
+    m_Value: 200
 --- !u!114 &7212281398608326211
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -1431,12 +1588,12 @@ MonoBehaviour:
   m_Name: Pixelate
   m_EditorClassIdentifier: Assembly-CSharp::Pixelate
   active: 1
-  "\u5F00\u5173":
-    m_OverrideState: 1
-    m_Value: 1
-  "\u50CF\u7D20\u683C\u6570":
-    m_OverrideState: 1
-    m_Value: 200
+  enable:
+    m_OverrideState: 0
+    m_Value: 0
+  intervalCount:
+    m_OverrideState: 0
+    m_Value: 10
 --- !u!114 &7597873190885520803
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -1450,12 +1607,12 @@ MonoBehaviour:
   m_Name: Pixelate
   m_EditorClassIdentifier: Assembly-CSharp::Pixelate
   active: 1
-  "\u5F00\u5173":
-    m_OverrideState: 1
-    m_Value: 1
-  "\u50CF\u7D20\u683C\u6570":
-    m_OverrideState: 1
-    m_Value: 250
+  enable:
+    m_OverrideState: 0
+    m_Value: 0
+  intervalCount:
+    m_OverrideState: 0
+    m_Value: 10
 --- !u!114 &8180908615027000766
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -1490,6 +1647,28 @@ MonoBehaviour:
   alpha:
     m_OverrideState: 1
     m_Value: 0
+--- !u!114 &8460753689689994159
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 0}
+  m_Name: Nosie
+  m_EditorClassIdentifier: Assembly-CSharp::Nosie
+  active: 1
+  enable:
+    m_OverrideState: 1
+    m_Value: 1
+  speed:
+    m_OverrideState: 1
+    m_Value: 0.4
+  strength:
+    m_OverrideState: 1
+    m_Value: 0.5
 --- !u!114 &8973178065122793294
 MonoBehaviour:
   m_ObjectHideFlags: 3

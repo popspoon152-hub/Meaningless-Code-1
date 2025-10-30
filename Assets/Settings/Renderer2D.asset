@@ -13,8 +13,10 @@ MonoBehaviour:
   m_Name: PixelateFeature
   m_EditorClassIdentifier: 
   m_Active: 0
-  setting: {myMaterial: {fileID: 2100000, guid: 8dc77ec38b8368942a03fcb4f9bdeede, type: 2}, injectPoint: 500}
---- !u!114 &-3090032212202199542
+  setting:
+    myMaterial: {fileID: 2100000, guid: 8dc77ec38b8368942a03fcb4f9bdeede, type: 2}
+    injectPoint: 500
+--- !u!114 &-7516263614770353474
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -23,13 +25,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 27b0fcfa2f6e4fe409993b0cc4dfa3f9, type: 3}
-  m_Name: PostProcessRendererFeature
+  m_Script: {fileID: 11500000, guid: c3e2c4712e50ebb4ea5f3dda320b2c12, type: 3}
+  m_Name: blockGlitchRendererFeature
   m_EditorClassIdentifier: 
   m_Active: 1
   settings:
-    renderPassEvent: 550
-    shader: {fileID: 4800000, guid: 24da8e1c00e125a44b53d94d94bafe98, type: 3}
+    renderPassEvent: 600
+    shader: {fileID: 4800000, guid: e3dc35caf4c18d845974526b519e9d5b, type: 3}
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -46,8 +48,8 @@ MonoBehaviour:
     debugReplacementPS: {fileID: 4800000, guid: cf852408f2e174538bcd9b7fda1c5ae7, type: 3}
     hdrDebugViewPS: {fileID: 4800000, guid: 573620ae32aec764abd4d728906d2587, type: 3}
   m_RendererFeatures:
-  - {fileID: -3090032212202199542}
-  m_RendererFeatureMap: 0a662c1f13001ed5
+  - {fileID: 446819036449616853}
+  m_RendererFeatureMap: d53376da8b6b3306
   m_UseNativeRenderPass: 0
   m_TransparencySortMode: 0
   m_TransparencySortAxis: {x: 0, y: 1, z: 0}
@@ -92,6 +94,22 @@ MonoBehaviour:
   m_DefaultLitMaterial: {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_DefaultUnlitMaterial: {fileID: 2100000, guid: 9dfc825aed78fcd4ba02077103263b40, type: 2}
   m_DefaultMaskMaterial: {fileID: 2100000, guid: 15d0c3709176029428a0da2f8cecf0b5, type: 2}
+--- !u!114 &446819036449616853
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 27b0fcfa2f6e4fe409993b0cc4dfa3f9, type: 3}
+  m_Name: PostProcessRendererFeature
+  m_EditorClassIdentifier: 
+  m_Active: 1
+  settings:
+    renderPassEvent: 550
+    shader: {fileID: 4800000, guid: e1adfba86a0691243801e218d00f6a58, type: 3}
 --- !u!114 &988177039060183228
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -122,3 +140,17 @@ MonoBehaviour:
       m_OverrideState: 0
       m_Value: {r: 1, g: 1, b: 1, a: 1}
   shader: {fileID: 4800000, guid: 24da8e1c00e125a44b53d94d94bafe98, type: 3}
+--- !u!114 &6539239814357370460
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 37a9ebadae796a6468dd6b0f5debc2f4, type: 3}
+  m_Name: PixelateFeature
+  m_EditorClassIdentifier: 
+  m_Active: 1
+  setting: {myMaterial: {fileID: 2100000, guid: 8dc77ec38b8368942a03fcb4f9bdeede, type: 2}, injectPoint: 500}

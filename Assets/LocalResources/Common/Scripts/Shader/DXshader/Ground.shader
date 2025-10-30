@@ -1,4 +1,4 @@
-Shader "Custom/Ground"
+Shader "Universal Render Pipeline/Ground"
 {
     Properties
     {
@@ -13,8 +13,9 @@ Shader "Custom/Ground"
     SubShader{
         Tags
         {
-            "RenderType"="Opaque"
-            "RenderPipeline"="UniversalRenderPipeline"
+            "RenderType" = "Transparent"
+            "RenderPipeline" = "UniversalPipeline"
+            "Queue" = "Transparent"
             "IgnoreProjector" = "true"
         }
         Cull Off
